@@ -1,10 +1,7 @@
-
-
-
 CATEGORY (id, name)
-ACTIVITY (id, name, fear_level, score, details,#CATEGORY(id))
-USER (id, login_name, mail)
-TICKET(id, price, date, #USER(id))
+ACTIVITY (id, name, fear_level, photo, details,#CATEGORY(id))
+USER (id, username, firstname, login, mail, adress, phoneNumber, rule)
+TICKET(id, price, date_entrance, #USER(id))
 Role (id, name, #USER(id))
 
 ## Table category
@@ -45,12 +42,12 @@ stocke les informations sur les tickets des utilisateurs
 | date | DATETIME | NOT NULL/ DEFAULT CURRENT_TIMESTAMP | Date d'achat du billet | 2024-06-15 14:30:00 |
 | id_user | INT | Foreign key | Référence à l'utilisateur qui a acheté le billet | 1 |
 
-## Table Role
+## Table Reservation
 stocke les informations sur les roles
 | Nom du champ | Type | Les contraintes | Description | Exemple de valeur |
 | --- | --- | --- | --- | --- |
-| id | INT | Primary key/ Auto_increment/unique| Identifiant unique de la catégorie| 1 |
-| name | VARCHAR(100) | NOT NULL, Unique| role unique du user | User |
-| id_user | INT | Foreign key | role unique du user | 1 |
+| code_réservation | INT | Primary key/ Auto_increment/unique| Identifiant unique de la catégorie| 1 |
+| date | date | NOT NULL | date d'achat de billet  | 11/01/2026 |
+| quantité | INT | quantité de billet  | role unique du user | 1 |
 
 <!--- ajout table de liaisons -->

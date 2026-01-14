@@ -16,7 +16,7 @@ Sur le site on veut:
 - BILLET: code billet, nom, prix, date d'entrée au parc
 - CATEGORIE: code catégorie, nom
 - ACTIVITE: code activité, nom, niveau frisson, détails, photo
-- RESERVATION: code de réservation date, quantité
+
  
 
 
@@ -28,7 +28,7 @@ Sur le site on veut:
 -L'entité BILLET est << liée >> à combien d'entités UTILISATEUR au minimum ? => 0
 -L'entité BILLET est << liée >> à combien d'entités UTILISATEUR au maximum ? => N
 
-relation : Acheter
+relation : Réserver:  code de réservation, date, quantité
 
 -L'entité CATEGORIE est << liée >> à combien d'entités ACTIVITE au minimum ? => 0
 -L'entité CATEGORIE est << liée >> à combien d'entités ACTIVITE au maximum ? => N
@@ -38,18 +38,4 @@ relation : Acheter
 
 relation : Contenir
 
--L'entité RESERVATION est << liée >> à combien d'entités BILLET au minimum ? => 1
--L'entité RESERVATION est << liée >> à combien d'entités BILLET au maximum ? => N
 
--L'entité BILLET est << liée >> à combien d'entités RESERVATION au minimum ? => 1
--L'entité BILLET est << liée >> à combien d'entités RESERVATION au maximum ? => N
-
-relation: Concerner
-
--L'entité RESERVATION est << liée >> à combien d'entités UTILISATEUR au minimum ? => 1
--L'entité RESERVATION est << liée >> à combien d'entités UTILISATEUR au maximum ? => N
-
--L'entité UTILISATEUR est << liée >> à combien d'entités RESERVATION au minimum ? => 1
--L'entité UTILISATEUR est << liée >> à combien d'entités RESERVATION au minimum ? => N
-
-relation: Faire
