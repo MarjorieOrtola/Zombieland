@@ -1,4 +1,6 @@
 
+
+
 CATEGORY (id, name)
 ACTIVITY (id, name, fear_level, score, details,#CATEGORY(id))
 USER (id, login_name, mail)
@@ -50,3 +52,5 @@ stocke les informations sur les roles
 | id | INT | Primary key/ Auto_increment/unique| Identifiant unique de la catégorie| 1 |
 | name | VARCHAR(100) | NOT NULL, Unique| role unique du user | User |
 | id_user | INT | Foreign key | role unique du user | 1 |
+
+<!--- ajout table de liaisons -->
