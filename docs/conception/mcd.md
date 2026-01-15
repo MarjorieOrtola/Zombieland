@@ -28,7 +28,7 @@ Sur le site on veut:
 -L'entité BILLET est << liée >> à combien d'entités UTILISATEUR au minimum ? => 0
 -L'entité BILLET est << liée >> à combien d'entités UTILISATEUR au maximum ? => N
 
-relation : Réserver:  code de réservation, reference, date, quantité
+relation : Réserver: reference, date, quantité
 
 -L'entité CATEGORIE est << liée >> à combien d'entités ACTIVITE au minimum ? => 0
 -L'entité CATEGORIE est << liée >> à combien d'entités ACTIVITE au maximum ? => N
@@ -37,5 +37,3 @@ relation : Réserver:  code de réservation, reference, date, quantité
 -L'entité ACTIVITE est << liée >> à combien d'entités CATEGORIE au maximum ? => 1
 
 relation : Contenir
-
-
