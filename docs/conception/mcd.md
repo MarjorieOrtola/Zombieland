@@ -12,7 +12,7 @@ Sur le site on veut:
 
 ## Entités
 
-- UTILISATEUR : mail, nom, prénom, adresse postale, numéro de tél, rôle
+- UTILISATEUR : mail, nom, prénom, adresse postale, ville, code postale, numéro de tél, rôle
 - BILLET: code billet, nom, prix, date d'entrée au parc
 - CATEGORIE: code catégorie, nom
 - ACTIVITE: code activité, nom, niveau frisson, détails, photo
@@ -28,7 +28,7 @@ Sur le site on veut:
 -L'entité BILLET est << liée >> à combien d'entités UTILISATEUR au minimum ? => 0
 -L'entité BILLET est << liée >> à combien d'entités UTILISATEUR au maximum ? => N
 
-relation : Réserver:  code de réservation, date, quantité
+relation : Réserver:  code de réservation, reference, date, quantité
 
 -L'entité CATEGORIE est << liée >> à combien d'entités ACTIVITE au minimum ? => 0
 -L'entité CATEGORIE est << liée >> à combien d'entités ACTIVITE au maximum ? => N

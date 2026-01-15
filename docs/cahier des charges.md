@@ -67,9 +67,9 @@ Personnes à partir de 16 ans voulant venir au Parc amatrices de frissons
 
 # Navigateurs compatibles:
 
-    * Chrome (préciser la version)
-    * Firefox 
-    * Safari
+    * Chrome 143.0.7499.193
+    * Firefox 147.0
+    * Safari 26.0
     
 # Liste des routes et verbes prévues
 
