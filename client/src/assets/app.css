@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'Nosifer';
+    src: url('../Nosifer-Regular.ttf');
+}
+
+:root {
+  /* Police système optimisée pour chaque plateforme */
+  --font-system: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+    sans-serif;
+  --font-bigtitle: 'Nosifer';  
+  
+  /* Couleur principale de l'application */
+  --primary: #007bff;
+  
+  /* Espacement standard utilisé dans l'application */
+  --gap: 1rem;
+}
+
+body{
+    background-color: aqua;
+
+}
+h1{
+    font-family: 'Nosifer', sans-serif;
+}
+
+ /* font-family: var(--font-system); Utilise la police définie dans :root */
