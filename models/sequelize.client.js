@@ -1,6 +1,9 @@
 //On importe sequelize
 import { Sequelize } from 'sequelize';
 
+// import de dotenv pour lire le fichier .env
+import 'dotenv/config';
+
 //On configure sequelize pour notre database zombieland
 const sequelize = new Sequelize(process.env.DATABASE_URL,{
     // define configure le comportement par défaut de Sequelize

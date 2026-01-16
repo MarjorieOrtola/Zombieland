@@ -5,22 +5,29 @@ import {Sequelize, Model, DataTypes} from 'sequelize';
 import sequelize from './sequelize.client.js';
 
 // Déclare une classe du modele
-class Category extends Model{
+class Ticket extends Model{
     // Contenue de la classe vide
 };
 
 // Creation de la table
-Category.init(
+Ticket.init(
     {
-        name: {
-            // Type string
-            type:DataTypes.STRING(100),
+        price: {
+            // type integer
+            type: DataTypes.INTEGER,
+            // Null interdit
+            allowNull: false,
+        },
+
+        date_entrance: {
+            // Type date
+            type: DataTypes.DATE,
             // Null interdit
             allowNull: false,
         },
     },
     // modelName ==> nom de la table à créer
-    { sequelize, modelName: 'category' },
+    { sequelize, modelName: 'ticket' },
 );
 
-export default Category;
+export default Ticket;
