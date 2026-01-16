@@ -2,26 +2,115 @@
     font-family: 'Nosifer';
     src: url('../Nosifer-Regular.ttf');
 }
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../Montserrat-Italic-VariableFont_wght.ttf');
+}
+
+
 
 :root {
   /* Police système optimisée pour chaque plateforme */
   --font-system: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
     sans-serif;
-  --font-bigtitle: 'Nosifer';  
-  
-  /* Couleur principale de l'application */
-  --primary: #007bff;
+  --font-big-title: 'Nosifer', var(--font-system); 
+  --font-paragraphe:'Monserat', var(--font-system);
+  --color-title-red: RGB(254, 8, 10);
+  --color-title-white:RGB(211, 211, 211);
+  --color-text:RGB(211, 211, 211);
+  --color-button:RGB(177, 0, 0);
+  /* Couleur principale de l'application en fond si image ne fonctionne pas */
+  --primary:#1D1D1D ;
   
   /* Espacement standard utilisé dans l'application */
   --gap: 1rem;
+
 }
 
-body{
-    background-color: aqua;
 
+body {
+    background-image: url('../assets/img/fondecran.png');
+    background-size: cover;      
+    background-position: center;  
+    background-attachment: fixed; 
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family:var(--font-paragraphe); 
+}
+
+h1,h2{
+    font-family: var(--font-big-title);
+    color: var(--color-title-red);
+    text-align: center;
 }
 h1{
-    font-family: 'Nosifer', sans-serif;
+  padding: 3rem;
 }
 
- /* font-family: var(--font-system); Utilise la police définie dans :root */
+.header{
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding: 1rem 0;
+
+}
+.header__class-logo{
+  display: flex;
+  align-items: center;
+
+}
+.header__class-nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: var(--color-text);
+  
+  
+
+}
+li{
+  font-size: 1rem;
+}
+li a{
+  text-decoration: none;
+  color: var(--color-text);
+}
+.header__logo {
+    width: 100%; 
+    max-width: 150px; 
+    height: auto; 
+    border-radius: 50%;
+}
+
+
+.main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  padding: 0 1rem;
+}
+
+.main__presentation, .main__illustration, .main__plan{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.presentation__text{
+  color: var(--color-title-white);
+  text-align: center;
+  min-width: 30%;
+  max-width: 80%;
+
+}
+.illustration__img, .plan__img{
+  max-height: 400px;
+  min-width: 30%;
+}
