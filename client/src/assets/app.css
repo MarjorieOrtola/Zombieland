@@ -44,33 +44,34 @@ h1,h2{
     color: var(--color-title-red);
     text-align: center;
 }
+
 h1{
-  padding: 3rem;
+   padding: 1.5rem;
+  font-size: 1.8rem;
 }
 
 .header{
   display: flex;
   flex-direction: column;
   height: auto;
-  margin-bottom: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  padding: 1rem 0;
-
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
+
 .header__class-logo{
   display: flex;
   align-items: center;
-
+  margin: 1rem;
+  
 }
 .header__class-nav{
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   color: var(--color-text);
+  margin-right: 2rem;
   
-  
-
 }
 li{
   font-size: 1rem;
@@ -84,6 +85,38 @@ li a{
     max-width: 150px; 
     height: auto; 
     border-radius: 50%;
+    /* Ajout d'une bordure transparent*/
+      mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 25%,
+      black 75%,
+      transparent
+    ),
+    linear-gradient(
+      to right,
+      transparent,
+      black 25%,
+      black 75%,
+      transparent
+    );
+  mask-composite: intersect;
+  -webkit-mask-composite: destination-in;
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      black 25%,
+      black 75%,
+      transparent
+    ),
+    linear-gradient(
+      to right,
+      transparent,
+      black 25%,
+      black 75%,
+      transparent
+    );
 }
 
 
@@ -113,4 +146,136 @@ li a{
 .illustration__img, .plan__img{
   max-height: 400px;
   min-width: 30%;
+  mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    ),
+    linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+
+  mask-composite: intersect;
+  -webkit-mask-composite: destination-in;
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    ),
+    linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+}
+
+.footer{
+  text-align: center;
+  padding: 1rem;
+  color: var(--color-text);
+  
+}
+.footer__button{
+  background-color: var(--primary);
+
+  color: var(--color-title-white);
+}
+.footer__button a{
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+
+
+/* Page attractions */
+.main__activity{
+  display: flex;
+  flex-direction: column;
+  margin:1rem
+}
+.main__button-info{
+  background-color: var(--primary);
+  color: var(--color-text);
+  
+}
+
+/* Pour les 3 pages: Attractions, spectacles, rencontres perso */
+.activity__img{
+  max-height: 400px;
+  min-width: 30%;
+  mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    ),
+    linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+
+  mask-composite: intersect;
+  -webkit-mask-composite: destination-in;
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    ),
+    linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+}
+
+/* page détail */
+.activity__detail{
+  color: var(--color-text);
+}
+
+/* Page Contact */
+
+.main__contact{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.contact__title{
+  font-family: var(--font-big-title);
+  color: var(--color-title-red);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.contact__text{
+  color: var(--color-title-white);
+  text-align: center;
+  min-width: 30%;
+  max-width: 80%;
+  margin-bottom: 1rem;
 }
