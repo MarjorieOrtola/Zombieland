@@ -224,7 +224,7 @@ h4{
     position: absolute; /* pour que ça s’affiche en dessous de "Activités" */
     top: 100%;        /* juste en dessous de l’onglet parent */
     left: 0;
-    background-color: rgba(0, 0, 0, 0.452);
+    background-color: rgba(0, 0, 0, 0.959);
     flex-direction: column;
     padding: 0.5rem 0;
     min-width: 200px;
