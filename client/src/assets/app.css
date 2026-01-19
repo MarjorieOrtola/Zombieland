@@ -18,9 +18,11 @@
   --color-title-red: RGB(254, 8, 10);
   --color-title-white:RGB(211, 211, 211);
   --color-text:RGB(211, 211, 211);
+  --color-input:black;
+  --background-form:#e6e6e6b7;
   --color-button:RGB(177, 0, 0);
   /* Couleur principale de l'application en fond si image ne fonctionne pas */
-  --primary:#1D1D1D ;
+  --primary:#1D1D1D ;,
   
   /* Espacement standard utilisé dans l'application */
   --gap: 1rem;
@@ -39,15 +41,33 @@ body {
     font-family:var(--font-paragraphe); 
 }
 
-h1,h2{
+h1,h2,h3{
     font-family: var(--font-big-title);
     color: var(--color-title-red);
     text-align: center;
+    
 }
 
 h1{
    padding: 1.5rem;
   font-size: 1.8rem;
+  margin:1rem;
+}
+h2{
+  margin:1rem;
+}
+
+h3{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+h4{
+  color: var(--color-title-white);
+  text-align: left;
+  text-decoration: underline;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .header{
@@ -57,6 +77,37 @@ h1{
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+/* menu burger à gauche et login à droite dans le header */
+.header__mobile-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.burger {
+  background-color: var(--color-button);
+  border: solid  darkred 3px;
+  color: var(--color-text);
+  font-size: 1.5rem;
+  cursor: pointer;
+
+}
+
+
+
+.header__button-login{
+  background-color: var(--color-button);
+  color: var(--color-text);
+  border: solid darkred 3px;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+
 }
 
 .header__class-logo{
@@ -71,10 +122,12 @@ h1{
   align-items: flex-start;
   color: var(--color-text);
   margin-right: 2rem;
+
   
 }
 li{
   font-size: 1rem;
+  list-style: none;
 }
 li a{
   text-decoration: none;
@@ -203,7 +256,9 @@ li a{
 .main__activity{
   display: flex;
   flex-direction: column;
-  margin:1rem
+  margin:1rem;
+  max-width: 80%;
+  align-items: center;
 }
 .main__button-info{
   background-color: var(--primary);
@@ -212,7 +267,7 @@ li a{
 }
 
 /* Pour les 3 pages: Attractions, spectacles, rencontres perso */
-.activity__img{
+.activity__img {
   max-height: 400px;
   min-width: 30%;
   mask-image: linear-gradient(
@@ -252,8 +307,47 @@ li a{
 
 /* page détail */
 .activity__detail{
-  color: var(--color-text);
+color: var(--color-text);
+text-align: center;
+ }
+
+.activity__img-detail{
+
+  mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    ),
+    linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+
+  mask-composite: intersect;
+  -webkit-mask-composite: destination-in;
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    ),
+    linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
 }
+
 
 /* Page Contact */
 
@@ -278,4 +372,83 @@ li a{
   min-width: 30%;
   max-width: 80%;
   margin-bottom: 1rem;
+}
+
+/* Inscription */
+
+.register__title{
+  margin-bottom: 3rem;
+}
+
+.register__form{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-bottom: 3rem;
+  width: 100%;
+  color: var(--color-text);
+}
+.register__form-label{
+  margin-bottom: 0.5rem;
+}
+
+.register__form input{
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: solid darkred 2px;
+  border-radius: 3px;
+  background-color: var(--background-form);
+  color: var(--color-input);
+}
+
+.register__form-button{
+  background-color: var(--color-button);
+  color: var(--color-text);
+  border: solid darkred 3px;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-top: 1.5rem;
+}
+
+/* page billeterie */
+.ticket{
+  display: flex;
+  justify-content: center;
+  color:var(--color-text);
+  margin:1rem;
+  text-align: center;
+
+}
+.ticket__button-validate{
+  display: flex;
+  justify-content: center;
+}
+
+p{
+  color: var(--color-text);
+  margin: 2rem;
+  text-align: center;
+}
+.ticket__form-label{
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 768px) {
+
+  .header__class-nav {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.288);
+  }
+
+  .header__class-nav ul {
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+  }
+
+  .header__button-login {
+    margin-left: auto;
+  }
 }
