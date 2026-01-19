@@ -22,7 +22,7 @@
   --background-form:#e6e6e6b7;
   --color-button:RGB(177, 0, 0);
   /* Couleur principale de l'application en fond si image ne fonctionne pas */
-  --primary:#1D1D1D ;,
+  --primary:#1D1D1D ;
   
   /* Espacement standard utilisé dans l'application */
   --gap: 1rem;
@@ -45,21 +45,24 @@ h1,h2,h3{
     font-family: var(--font-big-title);
     color: var(--color-title-red);
     text-align: center;
+  
     
 }
 
 h1{
-   padding: 1.5rem;
+  padding: 1.5rem;
   font-size: 1.8rem;
   margin:1rem;
+  
+
 }
 h2{
   margin:1rem;
+  padding: 0.5rem;
 }
 
 h3{
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem 0; /*Padding top et bottom 1rem, left et righ 0*/
 }
 
 h4{
@@ -74,9 +77,7 @@ h4{
   display: flex;
   flex-direction: column;
   height: auto;
-  margin-bottom: 0.5rem;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin:0.5rem;
 }
 
 /* menu burger à gauche et login à droite dans le header */
@@ -87,18 +88,16 @@ h4{
   width: 100%;
   padding: 0 1rem;
 }
-
+/*bouton burger*/
 .burger {
   background-color: var(--color-button);
   border: solid  darkred 3px;
   color: var(--color-text);
   font-size: 1.5rem;
   cursor: pointer;
-
 }
 
-
-
+/*bouton de login*/
 .header__button-login{
   background-color: var(--color-button);
   color: var(--color-text);
@@ -106,37 +105,21 @@ h4{
   border-radius: 3px;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  margin-top: 1rem;
+  margin-top: 0;   /* Permet d'aligner le bouton avec le menu burger*/
 
 }
-
+/* div avec le Logo et titre h1*/
 .header__class-logo{
   display: flex;
   align-items: center;
   margin: 1rem;
   
 }
-.header__class-nav{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  color: var(--color-text);
-  margin-right: 2rem;
-
-  
-}
-li{
-  font-size: 1rem;
-  list-style: none;
-}
-li a{
-  text-decoration: none;
-  color: var(--color-text);
-}
+/* Le logo*/
 .header__logo {
     width: 100%; 
-    max-width: 150px; 
-    height: auto; 
+    max-width: 120px; 
+    height: auto;
     border-radius: 50%;
     /* Ajout d'une bordure transparent*/
       mask-image: linear-gradient(
@@ -171,7 +154,102 @@ li a{
       transparent
     );
 }
+/*A partir de 600px, le logo s'agrandit*/
+@media (min-width: 600px) {
+  .header__logo {
+    max-width: 200px;
+  }
+}
 
+/*la barre de navigation*/
+.header__class-nav {
+  display: none; /* cachée sur mobile par défaut */
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+
+
+.header__nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+/*onglets principaux*/
+.header__nav-list > li {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.header__nav-list li a {
+  color: var(--color-text);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  display: block;
+}
+/*Liste des 3 onglets des activités*/
+.header__nav-dropdown {
+  display: none;
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0.5rem 0 0 0;
+}
+
+
+@media (min-width: 768px) {
+  /* Nav visible en horizontal */
+  .header__class-nav {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0,0,0,0.288);
+    padding: 0.5rem 1rem;
+  }
+
+  .header__nav-list {
+    display: flex;
+    gap: 2rem;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .header__nav-list > li {
+    margin-bottom: 0;
+  }
+.header__nav-activities {
+    position: relative; /* parent relatif pour que le dropdown s'affiche au bon endroit */
+  }
+  /* Dropdown caché par défaut */
+  .header__nav-dropdown {
+    display: none !important;
+    position: absolute; /* pour que ça s’affiche en dessous de "Activités" */
+    top: 100%;        /* juste en dessous de l’onglet parent */
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.452);
+    flex-direction: column;
+    padding: 0.5rem 0;
+    min-width: 200px;
+  }
+
+
+  .header__nav-activities:hover .header__nav-dropdown {
+    display: flex !important;
+   
+  }
+
+  /* Liens du dropdown */
+  .header__nav-dropdown li a {
+    padding: 0.5rem 1rem;
+  }
+   /* Align login to right */
+  .header__button-login {
+    margin-left: auto;
+  }
+
+  /* Cacher le burger sur desktop */
+  .burger {
+    display: none;
+  }
+}
 
 .main{
   display: flex;
@@ -194,6 +272,7 @@ li a{
   text-align: center;
   min-width: 30%;
   max-width: 80%;
+  margin-top: 2rem;
 
 }
 .illustration__img, .plan__img{
@@ -372,6 +451,10 @@ text-align: center;
   min-width: 30%;
   max-width: 80%;
   margin-bottom: 1rem;
+}
+
+.contact__text-coord {
+text-decoration: underline;
 }
 
 /* Inscription */
