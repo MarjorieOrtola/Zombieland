@@ -24,7 +24,7 @@ Activity.init(
             // Null interdit
             allowNull: false,
         },
-        score: {
+        image: {
             // Type integer (nombre entier)
             type: DataTypes.INTEGER,
             // Null interdit

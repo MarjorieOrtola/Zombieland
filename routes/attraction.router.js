@@ -7,7 +7,7 @@ import attractionController from "../controllers/attractions.controller.js";
 const router = Router();
 
 // requete HTTP GET
-router.get("/attractions/", attractionController.getAllAttractions);
+router.get("/attractions/", attractionController.getAllAttraction);
 
 // requete HTTP GET
 // router.get("/attraction/:id", AttractionController.getById);

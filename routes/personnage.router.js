@@ -1,14 +1,14 @@
 import { Router } from "express";
 
 // import d'une instance de ProductController
-import personnageController from "../controller/personnage.controller.js"; 
+import personnageController from "../controllers/personnages.controller.js"; 
 
 
 
 const router = Router();
 
 // requete HTTP GET
-// router.get("/personnages/");
+router.get("/personnages/", personnageController.getAllPersonnage);
 
 // requete HTTP GET
 // router.get("/personnage/:id");
