@@ -21,6 +21,12 @@ app.use(attractionRouter);
 app.use(spectacleRouter);
 app.use(personnageRouter);
 app.use(authRouter);
+app.use((err, req, res, next) => {
+  console.error(err);
+  const status = err.statusCode || 500;
+  const message = err.message || "Erreur serveur";
+  res.status(status).json({ message });
+});
 
 app.listen(3000, () => {
     console.log("Serveur lancer sur le port 3000")

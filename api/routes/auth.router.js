@@ -9,7 +9,7 @@ import validateUser from "../middlewares/auth.middleware.js";
 const router = Router();
 
 // requete HTTP POST /auth/register (route pour l'inscription)
-router.post("/register", validateUser, authController.registerUser);
+router.post("/auth/register", validateUser, authController.registerUser);
 
 
 // Recoit les requetes de connexion
