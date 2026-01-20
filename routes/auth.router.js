@@ -1,9 +1,8 @@
 import { Router } from "express";
 
 // import d'une instance de ProductController
-import authController from "../controllers/auth.controller.js"; 
-
-// import { validateUser, validateToken } from '../middlewares/auth.middleware.js';
+import authController from "../controllers/auth.controller.js";
+import validateUser from "../middlewares/auth.middleware.js"; 
 
 // import { validateUser } from '../middlewares/auth.middleware.js';
 

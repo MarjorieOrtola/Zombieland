@@ -1,13 +1,10 @@
 import Joi from 'joi';
-
 // import jwt from 'jsonwebtoken';
 import 'dotenv/config';
-
 import HttpError from '../utils/HttpError.js';
-
 import { User } from '../models/index.js';
 
-export function validateUser(req, res, next) {
+function validateUser(req, res, next) {
 
 	// Schema du JSON attendu
 	const userSchema = Joi.object({
@@ -35,3 +32,4 @@ export function validateUser(req, res, next) {
 	next();
 }
 
+export default validateUser;
