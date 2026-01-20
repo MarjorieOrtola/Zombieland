@@ -27,8 +27,10 @@
   },
   "homepage": "https://github.com/O-clock-Florence/projet-zombieland#readme",
   "dependencies": {
+    "argon2": "^0.44.0",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "joi": "^18.0.2",
     "pg": "^8.17.1",
     "sequelize": "^6.37.7"
   },
