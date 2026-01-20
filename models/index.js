@@ -11,7 +11,7 @@ Activity.belongsTo(Category,
     // Configuration de l'association
     {
         // Nom de la colonne qui contient la clé étrangère
-        foreignKey: 'id_category',
+        foreignKey: 'category_id',
         // Alias = Nom de la relation entre Activity et Catégorie
         // belongs to: one category ==> donc alias au singulier
         as: 'category',
@@ -24,10 +24,10 @@ Category.hasMany(Activity,
     {
         // Nom de la colonne qui contient la clé étrangère
         // La même que pour belongsTo Activity
-        foreignKey: 'id_category',
+        foreignKey: 'category_id',
         // Alias = Nom de la relation entre Categorie et Activity
-        // has many Activity ==> alias = activitys
-        as: 'activitys'
+        // has many Activity ==> alias = activities
+        as: 'activities'
     });
 
 // Association N - N 

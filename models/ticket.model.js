@@ -12,13 +12,18 @@ class Ticket extends Model{
 // Creation de la table
 Ticket.init(
     {
+        name: {
+            // type integer
+            type: DataTypes.STRING(50),
+            // Null interdit
+            allowNull: false,
+        },
         price: {
             // type integer
             type: DataTypes.INTEGER,
             // Null interdit
             allowNull: false,
         },
-
         date_entrance: {
             // Type date
             type: DataTypes.DATE,
