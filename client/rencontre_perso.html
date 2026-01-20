@@ -11,15 +11,9 @@
     <header class="header">
         <div class="header__class-logo">
             <img class="header__logo" src="./src/assets/img/Logozombieland.jpg" alt="Zombieland Logo" />
-            <h1>Bienvenue dans le parc d'attractions Zombieland</h1>
+            <h1>Vous les voulez frais ou décomposés</h1>
         </div>
-       <div class="header__mobile-bar">
-        <button class="burger" aria-label="Ouvrir le menu">☰</button>
-        <button class="header__button-login">Login</button>
-        </div>
-
-        <div class="header__class-nav">
-        <nav class="header__nav">
+        <div class="header__class-nav"><nav class="header__nav">
             <ul class="header__nav-list">
                 <li class="header__nav-activities"><a href="/">Activités</a>
                     <ul class="header__nav-dropdown">
@@ -33,22 +27,20 @@
                 <li class="header__nav-account"><a href="/mon_compte">Mon Compte</a></li>
             </ul>
         </nav>
-       
+        <button class="header__button-login">Login</button>
     </div>
     </header>
     <main class="main">
-        <section class="main__presentation">
-            <h2 class="presentation__title" >Entrez vivant.</h2>
-            <h2> Ressortez… si vous pouvez.</h2>
-            <p class="presentation__text">Bienvenue à Zombieland, le parc d’attractions où vos frissons prennent vie ! 🧟‍♂️ Ici, l’adrénaline coule à flots entre manèges terrifiants, décors post-apocalyptiques et rencontres plus vraies que nature avec nos habitants un peu… particuliers. Osez franchir nos portes, riez, criez, et plongez dans une aventure immersive où chaque pas vous rapproche d’un souvenir inoubliable. Bonne survie… et surtout, amusez-vous !</p>
+        
+        <section class="main__activity">
+            <h2 class="activity__title">Le maître des zombies</h2>
+            <img class="activity__img" src="./src/assets/img/Frankenstein.png" alt="Image du parc"/>
+            <button class="main__button-info">Plus d'informations</button>
         </section>
-        <section class="main__illustration">
-            <h2 class="illustration__title">Le Parc</h2>
-            <img class="illustration__img" src="./src/assets/img/deadrise.jpg" alt="Image du parc"/>
-        </section>
-        <section class="main__plan">
-            <h2 class="plan__title">Plan du site</h2>
-            <img class="plan__img" src="./src/assets/img/plan.png" alt="Image du plan du site"/>
+        <section class="main__activity">
+            <h2 class="activity__title">LA SURVIVANTE</h2>
+            <img class="activity__img" src="./src/assets/img/La dame au catana.png" alt="Image du parc"/>
+            <button class="main__button-info">Plus d'informations</button>
         </section>
     </main>
 
@@ -58,6 +50,6 @@
         <!-- Rajout de Icons pour les réseaux? -->
         <p>Mention légales</p>
     </footer>
+    <script type="module" src="/src/main.js"></script>
   </body>
-  <script type="module" src="./header.js"></script>
 </html>
