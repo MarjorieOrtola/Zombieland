@@ -36,7 +36,7 @@ User.init(
             // Null interdit
             allowNull: false,
         },
-        adress: {
+        address: {
             // Type string
             type: DataTypes.STRING(255),
             // Null interdit
@@ -65,6 +65,8 @@ User.init(
             type: DataTypes.STRING(20),
             // Null interdit
             allowNull: false,
+            // Valeur par défaut
+            defaultValue: 'user',
         },
     },
     // modelName ==> nom de la table à créer

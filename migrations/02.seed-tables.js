@@ -1,6 +1,6 @@
 import dotenv from "dotenv"
 import sequelize from "../models/sequelize.client.js";
-import { Activity, Category} from "../models/index.js";
+import { Activity, Category, User } from "../models/index.js";
 
 async function seed(){
     console.log('Syncing database...')
@@ -52,8 +52,21 @@ async function seed(){
         description: 'Osez affronter la créature… si vous l’osez. Dans les profondeurs du Repaire Maudit de Zombieland, là où la lumière ne perce jamais, Frankenstein vous attend. Son souffle rauque résonne entre les murs couverts de moisissure, ses pas lourds font trembler le sol sous vos pieds. Il n’est pas là pour vous rassurer. Approchez-vous… si vous en avez le courage. Ses yeux jaunes, injectés de sang, vous transpercent. Sa voix grave, déchirée par des siècles de souffrance, murmure des histoires que personne ne devrait entendre. Il se souvient de chaque visage qu’il a croisé… et de ceux qu’il a perdus.',
         category_id: personnage.id,
     });
+
+// Test création d'un compte utilisateur
+    await User.create({
+        first_name: 'Frank',
+        last_name: 'Kenstein',
+        password: 'azerty123',
+        mail: 'frankenstein@gmail.com',
+        address: '30 rue de la grande avenue',
+        postcode: '95041',
+        city: 'Paris',
+        phone_number: '0123456789',
+    });
+
     console.log('✅ Seeding complete!');
-   	} catch (error) {
+    } catch (error) {
 		console.log('Error seeding BDD', error);
 	} finally {
 		// Ferme la connexion à la BDD
