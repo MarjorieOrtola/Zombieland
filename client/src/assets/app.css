@@ -516,6 +516,25 @@ p{
 .ticket__form-label{
   margin-right: 0.5rem;
 }
+/* page 404 */
+.main__Error{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 8rem;
+  width: 100%;
+}
+.Error__title{
+  font-family: var(--font-big-title);
+  color: var(--color-title-red);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.Error__text{
+  color: var(--color-title-white);
+  text-align: center;
+  margin-bottom: 1rem;
+}
 
 @media (min-width: 768px) {
 
