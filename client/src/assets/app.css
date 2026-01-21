@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'Nosifer';
-    src: url('../Nosifer-Regular.ttf');
+    src: url('../public/Nosifer-Regular.ttf');
 }
 @font-face {
   font-family: 'Montserrat';
-  src: url('../Montserrat-Italic-VariableFont_wght.ttf');
+  src: url('../public/Montserrat-Italic-VariableFont_wght.ttf');
 }
 
 
