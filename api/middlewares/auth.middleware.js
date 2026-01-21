@@ -8,16 +8,15 @@ function validateUser(req, res, next) {
 
 	// Schema du JSON attendu
 	const userSchema = Joi.object({
-		firstname: Joi.string().alphanum().min(3).max(30).required(),
-        lastname: Joi.string().alphanum().min(3).max(30).required(),
-        mail: Joi.string().alphanum().min(3).max(50).required(),
-        address: Joi.string().alphanum().min(3).max(30).required(),
-		password: Joi.string().min(10).max(30).required(),
-        city: Joi.string().min(3).max(50).required(),
-        postcode: Joi.string().min(3).max(30).required(),
-        phone_number: Joi.string().alphanum().min(3).max(30).required(),
-        //role: Joi.string().valid('user', 'admin').required()
-	})
+		first_name: Joi.string().min(3).max(30).required(),
+		last_name: Joi.string().min(3).max(30).required(),
+		mail: Joi.string().email().required(),
+		address: Joi.string().min(3).max(255).required(),
+		password: Joi.string().min(6).max(30).required(),
+		city: Joi.string().min(2).max(50).required(),
+		postcode: Joi.string().min(3).max(10).required(),
+		phone_number: Joi.string().min(10).max(20).required()
+	});
 
 	const validation = userSchema.validate(req.body)
 

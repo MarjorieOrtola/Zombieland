@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zombieland</title>
-    <link rel="stylesheet" href="src/assets/app.css">
     <link rel="stylesheet" href="src/assets/reset.css">
+    <link rel="stylesheet" href="src/assets/app.css">
   </head>
   <body>
     <header class="header">
@@ -34,32 +34,37 @@
         <section class="main__register">
             <h2 class="register__title" >Créez votre compte</h2>
 
-  <form class="register__form">
+  <form class="register__form" id="registerForm" action="/register" method="POST">
     <h2></h2>
-    <label class ="register__form-label" for="prenom">Prénom</label>
-    <input type="text" id="prenom" name="prenom" required>
+    <label class ="register__form-label" for="first_name">Prénom</label>
+    <input type="text" id="first_name" name="first_name" required>
 
     <label class ="register__form-label" for="nom">Nom</label>
-    <input type="text" id="nom" name="nom" required>
+    <input type="text" id="nom" name="last_name" required>
 
     <label class ="register__form-label" for="mail">Mail</label>
     <input type="text" id="mail" name="mail" required>
 
-        <label class ="register__form-label" for="mdp">Mot de passe</label>
-    <input type="text" id="mdp" name="mdp" required>
+    <label class ="register__form-label" for="mdp">Mot de passe</label>
+    <input type="password" id="mdp" name="password" required>
 
     <label class ="register__form-label" for="adresse">Adresse</label>
-    <input type="text" id="adresse" name="adresse" required>
+    <input type="text" id="adresse" name="address" required>
 
     <label class ="register__form-label" for="ville">Ville</label>
-    <input type="text" id="ville" name="ville" required>
+    <input type="text" id="ville" name="city" required>
 
     <label class ="register__form-label" for="code-postal">Code postal</label>
-    <input type="text" id="code-postal" name="code_postal" required>
+    <input type="text" id="code-postal" name="postcode" required>
+
+    <label class="register__form-label" for="phone">Téléphone</label>
+    <input type="text" id="phone" name="phone_number" required>
+
 
     <button class="register__form-button" type="submit">S'inscrire</button>
   </form>
         </section>
+        
     </main>
 
     <footer class="footer">
@@ -68,6 +73,7 @@
         <!-- Rajout de Icons pour les réseaux? -->
         <p>Mention légales</p>
     </footer>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="./src/register.js"></script>
+    <script type="module" src="header.js"></script>
   </body>
 </html>

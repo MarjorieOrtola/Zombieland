@@ -34,8 +34,8 @@ async registerUser(req, res, next){
 
         // 4. Enregistrer le nouvel utilisateur dans la BDD avec le hash du mdp
         const newUser = await User.create({
-            firstname: dataJson.firstname,
-            lastname: dataJson.lastname,
+            first_name: dataJson.first_name,
+            last_name: dataJson.last_name,
             password: hash,
             mail: dataJson.mail,
             role: 'user',
