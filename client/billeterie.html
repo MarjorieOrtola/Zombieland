@@ -8,12 +8,18 @@
     <link rel="stylesheet" href="src/assets/app.css">
   </head>
   <body>
-    <header class="header">
+<header class="header">
         <div class="header__class-logo">
             <img class="header__logo" src="./src/assets/img/Logozombieland.jpg" alt="Zombieland Logo" />
-            <h1>Nos spectacles</h1>
+            <h1>Bienvenue dans le parc d'attractions Zombieland</h1>
         </div>
-        <div class="header__class-nav"><nav class="header__nav">
+       <div class="header__mobile-bar">
+        <button class="burger" aria-label="Ouvrir le menu">☰</button>
+        <button class="header__button-login">Login</button>
+        </div>
+
+        <div class="header__class-nav">
+        <nav class="header__nav">
             <ul class="header__nav-list">
                 <li class="header__nav-activities"><a href="/">Activités</a>
                     <ul class="header__nav-dropdown">
@@ -27,7 +33,7 @@
                 <li class="header__nav-account"><a href="/mon_compte">Mon Compte</a></li>
             </ul>
         </nav>
-        <button class="header__button-login">Login</button>
+       
     </div>
     </header>
     <main class="main">
@@ -54,6 +60,7 @@
         <!-- Rajout de Icons pour les réseaux? -->
         <p>Mention légales</p>
     </footer>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="./src/register.js"></script>
+    <script type="module" src="header.js"></script>
   </body>
 </html>

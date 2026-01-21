@@ -15,6 +15,8 @@
             </p>
         </section>
     </main>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="./src/register.js"></script>
+    <script type="module" src="header.js"></script>
+    
   </body>
 </html>
