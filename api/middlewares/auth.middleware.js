@@ -24,7 +24,7 @@ function validateUser(req, res, next) {
 		// ERROR le JSON de la request n'est pas valide !
 		// Erreur => lance une nouvelle erreur, elle sera attrapée par le middleware de gestion des erreurs
 		// Equivalent de : return next(new HttpError(validation.error, 400));
-		throw new HttpError("login ou mot de passe invalides", 400);
+		throw new HttpError("un des champs n'est pas correctement rempli", 400);
 	}
 
 	// Je ne suis pas rentré dans le IF, le body est valide donc j'appel le middleware suivant
