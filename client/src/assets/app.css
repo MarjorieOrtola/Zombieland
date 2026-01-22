@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'Nosifer';
-    src: url('../public/Nosifer-Regular.ttf');
+    src: url('/Nosifer-Regular.ttf');
 }
 @font-face {
   font-family: 'Montserrat';
-  src: url('../public/Montserrat-Italic-VariableFont_wght.ttf');
+  src: url('/Montserrat-Italic-VariableFont_wght.ttf');
 }
 
 
@@ -30,8 +30,8 @@
 }
 
 
-body {
-    background-image: url('../assets/img/fondecran.png');
+#app {
+    background-image: url('../img/fondecran.png');
     background-size: cover;      
     background-position: center;  
     background-attachment: fixed; 
@@ -168,7 +168,9 @@ h4{
   align-items: flex-start;
   margin-top: 1rem;
 }
-
+.header__class-nav.open {
+  display: flex;
+}
 
 .header__nav-list {
   list-style: none;
@@ -189,7 +191,8 @@ h4{
 }
 /*Liste des 3 onglets des activités*/
 .header__nav-dropdown {
-  display: none;
+  display: flex;
+  flex-direction: column;
   list-style: none;
   padding-left: 1rem;
   margin: 0.5rem 0 0 0;
