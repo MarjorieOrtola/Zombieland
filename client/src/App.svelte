@@ -1,47 +1,29 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+  import Header from './components/Header.svelte';
+  import Footer from './components/Footer.svelte';
+  import Attraction from './pages/Attraction.svelte';
+  import Spectacle from './pages/Spectacle.svelte';
+  import Inscription from './pages/Inscription.svelte';
+  import Rencontre_perso from './pages/Rencontre_perso.svelte';
+  import Contact from './pages/Contact.svelte';
+  import Home from './pages/Home.svelte';
+  import Billetterie from './pages/Billetterie.svelte';
+  import Faq from './pages/Faq.svelte';
+  import Compte from './pages/Compte.svelte';
+  import Connexion from './pages/Connexion.svelte';
+
+  let page = 'Inscription';
+
+  const pages = { Contact, Attraction, Home, Spectacle, Inscription, Billetterie, Rencontre_perso, Faq, Compte, Connexion};
+
+  function navigate(to) {
+    page = to;
+  }
 </script>
 
-<main>
-  <div>
-    <a href="https://vite.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
+<Header {navigate} />
 
-  <div class="card">
-    <Counter />
-  </div>
+<svelte:component this={pages[page]} />
 
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
+<Footer navigate={navigate} />
 
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
-</main>
-
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>

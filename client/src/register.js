@@ -14,13 +14,15 @@ form.addEventListener("submit", async (e) => {
     phone_number: document.getElementById("phone").value.trim(),
   };
 
+  /*response donne les infos HTTP(requête, headers, méhodes (json(),text()...))mais pas directement le contenu du body*/
   try {
-    const response = await fetch("http://localhost:3000/auth/register", {
+    const response = await fetch("http://localhost:3000/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
     });
 
+/*Les données du body sont dans le data et peuvent être réutilisées*/
     const data = await response.json(); // le body sera maintenant toujours du JSON
 
     if (!response.ok) {
@@ -30,6 +32,7 @@ form.addEventListener("submit", async (e) => {
 
     alert("Inscription réussie 🎉");
     console.log(data);
+    
   } catch (error) {
     console.error(error);
     alert("Erreur réseau ou serveur. Vérifiez la console.");
