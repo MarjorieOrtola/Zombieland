@@ -61,3 +61,41 @@
     </form>
   </section>
 </main>
+
+
+<style>
+.ticket__controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.ticket__amount {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  background-color: var(--color-button);
+  color: var(--color-text);
+  border: solid darkred 2px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ticket__amount:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.ticket input[type="number"] {
+  width: 60px;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 0.3rem;
+  border-radius: 4px;
+  border: solid darkred 2px;
+  background-color: var(--background-form);
+  color: var(--color-input);
+}
+</style>

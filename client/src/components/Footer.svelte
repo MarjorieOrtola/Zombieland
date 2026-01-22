@@ -1,8 +1,14 @@
+<script> 
+  export let navigate;
+
+  function goTo(page) {
+    navigate(page);
+  }
+</script>
+
 <footer class="footer">
   <!-- Lien FAQ -->
-  <a href="/FAQ" class="footer__button">
-    FAQ
-  </a>
+<a href="#" on:click|preventDefault={() => goTo('Faq')}>FAQ</a>
 
   <p>Suivez-nous sur les réseaux sociaux</p>
 
@@ -13,3 +19,5 @@
     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">IG</a>
   </div>
 </footer>
+
+

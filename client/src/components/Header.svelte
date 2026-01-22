@@ -33,13 +33,14 @@
   <div class="header__mobile-bar">
     <button class="burger" aria-label="Ouvrir le menu" on:click|stopPropagation={toggleMenu}>☰</button>
 
-    <button class="header__button-login">Login</button>
+    <button class="header__button-login" on:click={() => goTo('Connexion')}>Login</button>
+
   </div>
 
   <!-- Nav -->
   <nav class="header__class-nav" class:open={menuOpen} on:click|stopPropagation>
     <ul class="header__nav-list">
-      <li><a href="#" on:click|preventDefault={() => goTo('Home')}>Acceuil</a></li>
+      <li><a href="#" on:click|preventDefault={() => goTo('Home')}>Accueil</a></li>
       <li class="header__nav-activities">
         <a href="#" role="button" on:click|preventDefault={toggleDropdown}>Activités</a>
         {#if dropdownOpen}
@@ -50,7 +51,7 @@
           </ul>
         {/if}
       </li>
-      <li><a href="#" on:click|preventDefault={() => goTo('Tickets')}>Billetterie</a></li>
+      <li><a href="#" on:click|preventDefault={() => goTo('Billetterie')}>Billetterie</a></li>
       <li><a href="#" on:click|preventDefault={() => goTo('Contact')}>Contact</a></li>
       <li><a href="#" on:click|preventDefault={() => goTo('Compte')}>Mon Compte</a></li>
       <li><a href="#" on:click|preventDefault={() => goTo('Inscription')}>Inscription</a></li>
