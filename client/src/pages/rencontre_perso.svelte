@@ -1,62 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zombieland</title>
-    <link rel="stylesheet" href="src/assets/reset.css">
-    <link rel="stylesheet" href="src/assets/app.css">
-  </head>
-  <body>
-   <header class="header">
-        <div class="header__class-logo">
-            <img class="header__logo" src="./src/assets/img/Logozombieland.jpg" alt="Zombieland Logo" />
-            <h1>Bienvenue dans le parc d'attractions Zombieland</h1>
-        </div>
-       <div class="header__mobile-bar">
-        <button class="burger" aria-label="Ouvrir le menu">☰</button>
-        <button class="header__button-login">Login</button>
-        </div>
+    <script>
 
-        <div class="header__class-nav">
-        <nav class="header__nav">
-            <ul class="header__nav-list">
-                <li class="header__nav-activities"><a href="/">Activités</a>
-                    <ul class="header__nav-dropdown">
-                        <li class="header__nav-attractions"><a href="/">Attractions</a></li>
-                        <li class="header__nav-shows"><a href="/">Spectacles</a></li>
-                        <li class="header__nav-characters"><a href="/">Rencontres avec les personnages</a></li>
-                    </ul>
-                </li>
-                <li class="header__nav-tickets"><a href="/tickets">Billeterie</a></li>
-                <li class="header__nav-contact"><a href="/contact">Contact</a></li>
-                <li class="header__nav-account"><a href="/mon_compte">Mon Compte</a></li>
-            </ul>
-        </nav>
-       
-    </div>
-    </header>
-    <main class="main">
-        
-        <section class="main__activity">
-            <h2 class="activity__title">Le maître des zombies</h2>
-            <img class="activity__img" src="./src/assets/img/Frankenstein.png" alt="Image du parc"/>
-            <button class="main__button-info">Plus d'informations</button>
-        </section>
-        <section class="main__activity">
-            <h2 class="activity__title">LA SURVIVANTE</h2>
-            <img class="activity__img" src="./src/assets/img/La dame au catana.png" alt="Image du parc"/>
-            <button class="main__button-info">Plus d'informations</button>
-        </section>
-    </main>
+    const activities = [
+    {
+      title: "Le maître des zombies",
+      img: './img/Frankenstein.png'
+    },
+    {
+      title: "LA SURVIVANTE",
+      img: './img/La dame au catana.png'
+    }
+  ];
+</script>
 
-    <footer class="footer">
-        <button class="footer__button"><a href="/FAQ">FAQ</a></button>
-        <p >Suivez-nous sur les réseaux sociaux</p>
-        <!-- Rajout de Icons pour les réseaux? -->
-        <p>Mention légales</p>
-    </footer>
-    <script type="module" src="./src/register.js"></script>
-    <script type="module" src="header.js"></script>
-  </body>
-</html>
+<main class="main">
+  {#each activities as activity}
+    <section class="main__activity">
+      <h2 class="activity__title">{activity.title}</h2>
+
+      <img class="activity__img" src={activity.img} alt="Image du parc" />
+
+      <button class="main__button-info" type="button">
+        Plus d'informations
+      </button>
+    </section>
+  {/each}
+</main>

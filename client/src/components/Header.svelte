@@ -39,19 +39,21 @@
   <!-- Nav -->
   <nav class="header__class-nav" class:open={menuOpen} on:click|stopPropagation>
     <ul class="header__nav-list">
+      <li><a href="#" on:click|preventDefault={() => goTo('Home')}>Acceuil</a></li>
       <li class="header__nav-activities">
         <a href="#" role="button" on:click|preventDefault={toggleDropdown}>Activités</a>
         {#if dropdownOpen}
           <ul class="header__nav-dropdown">
             <li><a href="#" on:click|preventDefault={() => goTo('Attraction')}>Attractions</a></li>
-            <li><a href="#">Spectacles</a></li>
-            <li><a href="#">Rencontres personnages</a></li>
+            <li><a href="#" on:click|preventDefault={() => goTo('Spectacle')}>Spectacles</a></li>
+            <li><a href="#" on:click|preventDefault={() => goTo('Rencontre_perso')}>Rencontres personnages</a></li>
           </ul>
         {/if}
       </li>
       <li><a href="#" on:click|preventDefault={() => goTo('Tickets')}>Billetterie</a></li>
       <li><a href="#" on:click|preventDefault={() => goTo('Contact')}>Contact</a></li>
-      <li><a href="#">Mon Compte</a></li>
+      <li><a href="#" on:click|preventDefault={() => goTo('Compte')}>Mon Compte</a></li>
+      <li><a href="#" on:click|preventDefault={() => goTo('Inscription')}>Inscription</a></li>
     </ul>
   </nav>
 </header>

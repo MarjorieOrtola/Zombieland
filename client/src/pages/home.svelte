@@ -1,64 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zombieland</title>
-    <link rel="stylesheet" href="src/assets/reset.css">
-    <link rel="stylesheet" href="src/assets/app.css">
-  </head>
-  <body>
-    <header class="header">
-        <div class="header__class-logo">
-            <img class="header__logo" src="./src/assets/img/Logozombieland.jpg" alt="Zombieland Logo" />
-            <h1>Bienvenue dans le parc d'attractions Zombieland</h1>
-        </div>
-       <div class="header__mobile-bar">
-        <button class="burger" aria-label="Ouvrir le menu">☰</button>
-        <button class="header__button-login">Login</button>
-        </div>
-
-        <div class="header__class-nav">
-        <nav class="header__nav">
-            <ul class="header__nav-list">
-                <li class="header__nav-activities"><a href="/">Activités</a>
-                    <ul class="header__nav-dropdown">
-                        <li class="header__nav-attractions"><a href="/">Attractions</a></li>
-                        <li class="header__nav-shows"><a href="/">Spectacles</a></li>
-                        <li class="header__nav-characters"><a href="/">Rencontres avec les personnages</a></li>
-                    </ul>
-                </li>
-                <li class="header__nav-tickets"><a href="/tickets">Billeterie</a></li>
-                <li class="header__nav-contact"><a href="/contact">Contact</a></li>
-                <li class="header__nav-account"><a href="/mon_compte">Mon Compte</a></li>
-            </ul>
-        </nav>
-       
-    </div>
-    </header>
+<script>
+const activities = [
+    {
+      title: 'DEAD RISE',
+      img: '/img/deadrise.jpg'
+    },
+    {
+      title: 'PLAN DU SITE',
+      img: '/img/plan.png'
+    }
+  ];
+</script>
     <main class="main">
         <section class="main__presentation">
             <h2 class="presentation__title" >Entrez vivant.</h2>
             <h2> Ressortez… si vous pouvez.</h2>
             <p class="presentation__text">Bienvenue à Zombieland, le parc d’attractions où vos frissons prennent vie ! 🧟‍♂️ Ici, l’adrénaline coule à flots entre manèges terrifiants, décors post-apocalyptiques et rencontres plus vraies que nature avec nos habitants un peu… particuliers. Osez franchir nos portes, riez, criez, et plongez dans une aventure immersive où chaque pas vous rapproche d’un souvenir inoubliable. Bonne survie… et surtout, amusez-vous !</p>
         </section>
-        <section class="main__illustration">
-            <h2 class="illustration__title">Le Parc</h2>
-            <img class="illustration__img" src="./src/assets/img/deadrise.jpg" alt="Image du parc"/>
-        </section>
-        <section class="main__plan">
-            <h2 class="plan__title">Plan du site</h2>
-            <img class="plan__img" src="./src/assets/img/plan.png" alt="Image du plan du site"/>
-        </section>
-    </main>
+  {#each activities as activity}
+    <section class="main__activity">
+      <h2 class="activity__title">{activity.title}</h2>
 
-    <footer class="footer">
-        <button class="footer__button"><a href="/FAQ">FAQ</a></button>
-        <p >Suivez-nous sur les réseaux sociaux</p>
-        <!-- Rajout de Icons pour les réseaux? -->
-        <p>Mention légales</p>
-    </footer>
-  </body>
- <script type="module" src="./src/register.js"></script>
-<script type="module" src="header.js"></script>
-</html>
+      <img class="activity__img" src={activity.img} alt="Image du parc" />
+    </section>
+  {/each}
+    </main>

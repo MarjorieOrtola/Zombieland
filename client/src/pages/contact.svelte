@@ -1,5 +1,5 @@
 <script>
-  // pas de header/nav ici !
+
 </script>
 
 <main class="main">
