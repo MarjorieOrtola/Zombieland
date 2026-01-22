@@ -12,9 +12,24 @@
   import Compte from './pages/Compte.svelte';
   import Connexion from './pages/Connexion.svelte';
 
+  import Router from 'svelte-spa-router';
+
   let page = 'Inscription';
 
   const pages = { Contact, Attraction, Home, Spectacle, Inscription, Billetterie, Rencontre_perso, Faq, Compte, Connexion};
+
+  const routes = {
+    '/contact': Contact,
+    '/attraction': Attraction,
+    '/home': Home,
+    '/spectacle': Spectacle,
+    '/inscription': Inscription,
+    '/billetterie': Billetterie,
+    '/rencontre_perso': Rencontre_perso,
+    '/faq': Faq,
+    '/compte': Compte,
+    '/connexion': Connexion,
+  };
 
   function navigate(to) {
     page = to;
@@ -24,6 +39,8 @@
 <Header {navigate} />
 
 <svelte:component this={pages[page]} />
+
+<Router {routes} />
 
 <Footer navigate={navigate} />
 

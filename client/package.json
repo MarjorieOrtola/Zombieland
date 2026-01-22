@@ -17,5 +17,8 @@
   "main": "header.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "svelte-spa-router": "^4.0.1"
+  }
 }
