@@ -23,4 +23,9 @@ const activities = [
       <img class="activity__img" src={activity.img} alt="Image du parc" />
     </section>
   {/each}
+  <h4>Horaires d'ouverture du parc</h4>
+    <p class="contact__address">Du lundi au vendredi : 10h - 21h
+    </p>
+    <p class="contact__address">Le week-end : 10h - 23h
+    </p>
     </main>

@@ -238,6 +238,13 @@ h4{
   padding: 1rem;
   color: var(--color-text);
 }
+
+.footer__faq {
+  font-weight: bold;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
 .footer__button{
   background-color: var(--primary);
 
