@@ -53,7 +53,7 @@ async function seed(){
         category_id: personnage.id,
     });
 
-// Test création d'un compte utilisateur
+// Test création d'un compte utilisateur en dur
     await User.create({
         first_name: 'Frank',
         last_name: 'Kenstein',
@@ -63,6 +63,13 @@ async function seed(){
         postcode: '95041',
         city: 'Paris',
         phone_number: '0123456789',
+    });
+
+// Creation du Ticket d'entrée unique 
+    await Ticket.create({
+        name: 'Entrée unique',
+        price: 50.00,
+        date_entrance: con = new Date(),
     });
 
     console.log('✅ Seeding complete!');

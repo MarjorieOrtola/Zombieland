@@ -5,7 +5,7 @@
 <footer class="footer">
   
   <!-- Lien FAQ -->
-<a href="/faq">FAQ</a>
+<a href="/#/faq">FAQ</a>
 
   <p>Suivez-nous sur les réseaux sociaux</p>
 

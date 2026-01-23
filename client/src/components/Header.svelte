@@ -80,6 +80,7 @@
   cursor: pointer;
   text-align: left;
 }
+
 .header__class-nav a:hover,
 .header__class-nav a:focus,
 .header__nav-button:hover,

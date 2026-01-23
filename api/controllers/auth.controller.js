@@ -65,6 +65,60 @@ async registerUser(req, res, next){
     
         } catch (error) {
         next(error);
-        }}};
+        }
+    },
+
+async login(req,res,next){
+
+    try {
+
+        // 1. récupérer le body de la requête
+        // Dans le body j'attends les données du nouvel utilisateur à enregistrer
+        // dataJson = { username: "....", password: "....." }
+        const dataJson = req.body;
+
+        // 2. Chercher le user selon son nom
+        // SELECT * FROM user ... WHERE username = dataJson.username
+        const userFromBDD = await User.findOne(
+        {
+            // WHERE mail = dataJson.mail
+            where: { mail: dataJson.mail }
+        });
+        if (!userFromBDD) {
+            // result est null ! L'utilisateur n'existe pas dans la BDD
+            throw new HttpError('login ou mot de passe incorrect', 401);
+        }
+
+        // 3. Vérifier si le mot de passe de l'utilisateur correspond au hash mis dans la BDD
+        if (!(await argon2.verify(userFromBDD.password, dataJson.password))) {
+            // Le mot de passe ne correspond pas !
+            throw new HttpError('login ou mot de passe incorrect', 401);
+        }
+
+        // 4. Créer le token avec l'id de l'utilisateur
+        // process.env.JWT_SECRET ==> va chercher le secret qui est dans .env
+        const token = jwt.sign(
+        // Les données à mettre dans le token ==> PAYLOAD (charge utile)
+        {
+          // Id de l'utilisateur
+          user_id: userFromBDD.id
+        },
+        // Le secret pour calculer le token
+        process.env.JWT_SECRET, // Le secret que j'ai découvert de l'API
+        // Date d'expiration du token : le token expire dans une heure !
+        {
+          expiresIn: '1h'
+        });
+
+        // 5. Réponse à la requete du client : 200 + le token
+        res.status(200).json({ token });
+
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+    
+
 
 export default authController;

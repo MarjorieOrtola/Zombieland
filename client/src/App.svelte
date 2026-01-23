@@ -16,7 +16,7 @@
   import Router from 'svelte-spa-router';
 
   const routes = {
-    '/': Home,
+    '/': Home, /* Point d'entrée obligatoire */
     '/home': Home,
     '/contact': Contact,
     '/attraction': Attraction,
