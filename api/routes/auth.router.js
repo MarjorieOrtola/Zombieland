@@ -2,7 +2,7 @@ import { Router } from "express";
 
 // import d'une instance de ProductController
 import authController from "../controllers/auth.controller.js";
-import validateUser from "../middlewares/auth.middleware.js"; 
+import { validateUser, validateLogin, validateToken } from "../middlewares/auth.middleware.js"; 
 
 // import { validateUser } from '../middlewares/auth.middleware.js';
 
@@ -13,8 +13,8 @@ router.post("/register", validateUser, authController.registerUser);
 
 
 // Recoit les requetes de connexion
-// router.post('/auth/login', validateUser, authController.login)
+router.post('/login', validateLogin, authController.login)
 
-// router.get('/auth/me', validateToken, authController.getMe)
+/*router.get('/myaccount', validateToken, authController.getMe)*/
 
 export default router;

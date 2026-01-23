@@ -1,9 +1,21 @@
 <script>
+/*
+  Service d’authentification (appel API)
+  import { loginUser } from "../services/auth.service.js";
+
+  // Store global d’authentification
+  import { setAuth } from "../stores/auth.svelte.js";
+
+  // Navigation après connexion
+  import { goto } from "$app/navigation";
+*/
+  
   let mail = "";
   let password = "";
 
   async function handleSubmitLogin() {
-    const user = {
+    // informations de connexion de l'utilisateur
+    const credentials = {
         mail,
         password,
     };
@@ -12,7 +24,7 @@
       const response = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
+        body: JSON.stringify(credentials),
       });
 
       const data = await response.json();
@@ -22,7 +34,7 @@
         return;
       }
 
-      alert("Inscription réussie 🎉");
+      alert("Connexion réussie 🎉");
       console.log(data);
 
       // Réinitialiser le formulaire
@@ -38,7 +50,7 @@
   <section class="main__login">
     <h2 class="register__title">Connectez-vous</h2>
 
-    <form class="login__form" on:submit|preventDefault={login}>
+    <form class="login__form" on:submit|preventDefault={handleSubmitLogin}>
       <label class="register__form-label" for="mail">Mail</label>
       <input type="email" id="mail" name="mail" bind:value={mail} required />
 
