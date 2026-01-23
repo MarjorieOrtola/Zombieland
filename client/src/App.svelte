@@ -1,27 +1,25 @@
 <script>
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
-  import Attraction from './pages/Attraction.svelte';
-  import Spectacle from './pages/Spectacle.svelte';
-  import Inscription from './pages/Inscription.svelte';
-  import Rencontre_perso from './pages/Rencontre_perso.svelte';
-  import Contact from './pages/Contact.svelte';
-  import Home from './pages/Home.svelte';
-  import Billetterie from './pages/Billetterie.svelte';
-  import Faq from './pages/Faq.svelte';
-  import Compte from './pages/Compte.svelte';
-  import Connexion from './pages/Connexion.svelte';
+
+  import Home from './routes/Home.svelte';
+  import Contact from './routes/Contact.svelte';
+  import Attraction from './routes/Attraction.svelte';
+  import Spectacle from './routes/Spectacle.svelte';
+  import Inscription from './routes/Inscription.svelte';
+  import Billetterie from './routes/Billetterie.svelte';
+  import Rencontre_perso from './routes/Rencontre_perso.svelte';
+  import Faq from './routes/Faq.svelte';
+  import Compte from './routes/Compte.svelte';
+  import Connexion from './routes/Connexion.svelte';
 
   import Router from 'svelte-spa-router';
 
-  let page = 'Inscription';
-
-  const pages = { Contact, Attraction, Home, Spectacle, Inscription, Billetterie, Rencontre_perso, Faq, Compte, Connexion};
-
   const routes = {
+    '/': Home,
+    '/home': Home,
     '/contact': Contact,
     '/attraction': Attraction,
-    '/home': Home,
     '/spectacle': Spectacle,
     '/inscription': Inscription,
     '/billetterie': Billetterie,
@@ -30,17 +28,10 @@
     '/compte': Compte,
     '/connexion': Connexion,
   };
-
-  function navigate(to) {
-    page = to;
-  }
 </script>
 
-<Header {navigate} />
-
-<svelte:component this={pages[page]} />
+<Header />
 
 <Router {routes} />
 
-<Footer navigate={navigate} />
-
+<Footer />

@@ -1,16 +1,13 @@
 <script>
-  export let navigate;
-
   let menuOpen = false;
   let dropdownOpen = false;
 
-  function toggleMenu() { menuOpen = !menuOpen; }
-  function toggleDropdown(e) { e.preventDefault(); dropdownOpen = !dropdownOpen; }
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+  }
 
-  function goTo(page) {
-    navigate(page);
-    menuOpen = false;
-    dropdownOpen = false;
+  function toggleDropdown() {
+    dropdownOpen = !dropdownOpen;
   }
 
   function closeAll() {
@@ -19,42 +16,73 @@
   }
 </script>
 
-<!-- Svelte:window doit être au niveau du composant, pas à l'intérieur du header -->
 <svelte:window on:click={closeAll} />
 
 <header class="header">
-  <!-- Logo + titre -->
   <div class="header__class-logo">
     <img class="header__logo" src="/img/Logozombieland.jpg" alt="Zombieland Logo" />
     <h1>Bienvenue dans le parc d'attractions Zombieland</h1>
   </div>
 
-  <!-- Mobile bar : burger + login -->
   <div class="header__mobile-bar">
-    <button class="burger" aria-label="Ouvrir le menu" on:click|stopPropagation={toggleMenu}>☰</button>
+    <button
+      class="burger"
+      aria-label="Ouvrir le menu"
+      on:click|stopPropagation={toggleMenu}
+    >
+      ☰
+    </button>
 
-    <button class="header__button-login" on:click={() => goTo('Connexion')}>Login</button>
-
+    <a class="header__button-login" href="/#/connexion">
+      Login
+    </a>
   </div>
 
-  <!-- Nav -->
-  <nav class="header__class-nav" class:open={menuOpen} on:click|stopPropagation>
+  <nav class="header__class-nav" class:open={menuOpen}>
     <ul class="header__nav-list">
-      <li><a href="#" on:click|preventDefault={() => goTo('Home')}>Accueil</a></li>
+      <li><a href="/" on:click={closeAll}>Accueil</a></li>
+
       <li class="header__nav-activities">
-        <a href="#" role="button" on:click|preventDefault={toggleDropdown}>Activités</a>
+        <button
+          type="button"
+          class="header__nav-button"
+          on:click|stopPropagation={toggleDropdown}
+        >
+          Activités
+        </button>
+
         {#if dropdownOpen}
           <ul class="header__nav-dropdown">
-            <li><a href="#" on:click|preventDefault={() => goTo('Attraction')}>Attractions</a></li>
-            <li><a href="#" on:click|preventDefault={() => goTo('Spectacle')}>Spectacles</a></li>
-            <li><a href="#" on:click|preventDefault={() => goTo('Rencontre_perso')}>Rencontres personnages</a></li>
+            <li><a href="/#/attraction" on:click={closeAll}>Attractions</a></li>
+            <li><a href="/#/spectacle" on:click={closeAll}>Spectacles</a></li>
+            <li><a href="/#/rencontre_perso" on:click={closeAll}>Rencontres personnages</a></li>
           </ul>
         {/if}
       </li>
-      <li><a href="#" on:click|preventDefault={() => goTo('Billetterie')}>Billetterie</a></li>
-      <li><a href="#" on:click|preventDefault={() => goTo('Contact')}>Contact</a></li>
-      <li><a href="#" on:click|preventDefault={() => goTo('Compte')}>Mon Compte</a></li>
-      <li><a href="#" on:click|preventDefault={() => goTo('Inscription')}>Inscription</a></li>
+
+      <li><a href="/#/billetterie" on:click={closeAll}>Billetterie</a></li>
+      <li><a href="/#/contact" on:click={closeAll}>Contact</a></li>
+      <li><a href="/#/compte" on:click={closeAll}>Mon Compte</a></li>
+      <li><a href="/#/inscription" on:click={closeAll}>Inscription</a></li>
     </ul>
   </nav>
 </header>
+
+<style>
+.header__nav-button {
+  background: none;
+  border: none;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.header__nav-button:hover,
+.header__nav-button:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+</style>

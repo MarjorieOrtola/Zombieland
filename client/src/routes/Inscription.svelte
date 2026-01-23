@@ -27,8 +27,7 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
       });
-      
-      // Pour stocker les données du body
+
       const data = await response.json();
 
       if (!response.ok) {
