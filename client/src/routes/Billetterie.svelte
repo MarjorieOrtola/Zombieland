@@ -15,6 +15,9 @@
     console.log("Nombre de tickets :", amount);
    
   }
+
+  let selectedDate = "";
+
 </script>
 
 <main class="main">
@@ -22,7 +25,14 @@
     <h2 class="activity__title">Choisissez le nombre d'aventures</h2>
     <p>Billet sur une journée complète. Description du billet ici</p>
     <p>Rajouter un calendrier ici pour choisir la date</p>
-
+  <label class="ticket__date-label">
+    Choisissez votre date de visite :
+    <input class="ticket__date-input"
+      type="date"
+      bind:value={selectedDate}
+      min={new Date().toISOString().split("T")[0]}
+    />
+  </label>
     <form class="ticket" on:submit|preventDefault={validate}>
       <label class="ticket__form-label" for="amount">
         Nombre de tickets

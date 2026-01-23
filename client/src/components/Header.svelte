@@ -69,6 +69,7 @@
 </header>
 
 <style>
+.header__class-nav a,
 .header__nav-button {
   background: none;
   border: none;
@@ -79,7 +80,8 @@
   cursor: pointer;
   text-align: left;
 }
-
+.header__class-nav a:hover,
+.header__class-nav a:focus,
 .header__nav-button:hover,
 .header__nav-button:focus {
   background-color: rgba(255, 255, 255, 0.1);

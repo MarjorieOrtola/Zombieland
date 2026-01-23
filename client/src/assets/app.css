@@ -451,6 +451,19 @@ p{
 .ticket__form-label{
   margin-right: 0.5rem;
 }
+.ticket__date-label{
+  color: var(--color-text);
+}
+.ticket__date-input{
+
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: solid darkred 2px;
+  border-radius: 3px;
+  background-color: var(--background-form);
+  color: var(--color-input);
+}
+
 /* page 404 */
 .main__Error{
   display: flex;
