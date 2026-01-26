@@ -89,9 +89,11 @@ export function validateToken(req, res, next) {
 		// 5. Ajouter dans la requete (req) une nouvelle constante "user_id" qui contient l'id de l'utilisateur
 		// cet id est extrait des valeurs du token
 		req.user_id = decoded.user_id;
+		// 5. passe au middleware suivante
+		next();
 	});
 
-	// 5. passe au middleware suivante
-	next();
+
+	
 }
 

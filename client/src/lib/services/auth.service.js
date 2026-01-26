@@ -1,7 +1,7 @@
 // C’est la couche métier (service) dédiée à l’authentification côté front.
 // Il sert à :
 // communiquer avec les routes / du backend
-// centraliser la logique login / register / me
+// centraliser la logique login / register / myaccount
 // éviter de mettre des fetch() dans les composants Svelte
 // faire le lien entre API et authStore
 
@@ -11,11 +11,11 @@ export const registerUser = async (user) => {
   return await api("/register", "POST", user);
 };
 
-export const loginUser = async (credentials) => {
+export const loginUser = async () => {
 
-  // credentials : un objet littéral avec clé username et password pour le nom et le mdp de connexion
+  // credentials : un objet littéral avec clé mail et password pour le nom et le mdp de connexion
   // exemple : { username: 'Josiane', password: 'azertyuiop' }
-  const { token } = await api("/login", "POST", credentials);
+  const { token } = await api("/login", "POST", { mail, password });
 
   // affiche le token
   // le token est représenté par une grande chaîne de caractères

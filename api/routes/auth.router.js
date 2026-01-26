@@ -15,6 +15,6 @@ router.post("/register", validateUser, authController.registerUser);
 // Recoit les requetes de connexion
 router.post('/login', validateLogin, authController.login)
 
-/*router.get('/myaccount', validateToken, authController.getMe)*/
+router.get('/myaccount', validateToken, authController.getMyAccount)
 
 export default router;

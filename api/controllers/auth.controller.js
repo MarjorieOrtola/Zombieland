@@ -1,7 +1,7 @@
 import { User } from '../models/index.js';
 import HttpError from '../utils/HttpError.js';
 import argon2 from 'argon2';
-// import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 // import dotenv pour lire le fichier .env
 import 'dotenv/config';
@@ -116,7 +116,36 @@ async login(req,res,next){
     } catch (error) {
       next(error);
     }
+  },
+  
+ async getMyAccount(req, res, next) {
+  try {
+    // ID utilisateur extrait du token
+    const userId = req.user_id;
+
+    console.log('\nGET ME - userId:', userId);
+
+    // Récupération de l'utilisateur
+    const user = await User.findByPk(userId, {
+      attributes: {
+        exclude: ['password'] // 🔐 jamais renvoyer le mdp
+      }
+    });
+
+    // Utilisateur non trouvé
+    if (!user) {
+      throw new HttpError('Utilisateur introuvable', 404);
+    }
+
+    // Réponse
+    res.json(user);
+
+  } catch (err) {
+    next(err);
   }
+}
+
+
 }
     
 
