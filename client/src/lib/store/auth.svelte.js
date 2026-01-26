@@ -11,6 +11,9 @@ export const setAuth = (user, token) => {
   authStore.user = user;
   authStore.token = token;
 
+  
+
+
   // Enregistrer user et token dans le localStorage
   localStorage.setItem('token', token);
   localStorage.setItem('user', JSON.stringify(user)); // {username: "toto"; role: {"name"; "admin"}}

@@ -14,6 +14,9 @@
   import Connexion from './routes/Connexion.svelte';
 
   import Router from 'svelte-spa-router';
+  import { getAuth } from './lib/store/auth.svelte.js';
+  
+  getAuth(); // restaure user/token depuis localStorage au chargement
 
   const routes = {
     '/': Home, /* Point d'entrée obligatoire */
@@ -29,6 +32,8 @@
     '/connexion': Connexion,
   };
 </script>
+
+
 
 <Header />
 

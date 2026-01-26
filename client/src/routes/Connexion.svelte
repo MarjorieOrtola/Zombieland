@@ -1,15 +1,14 @@
 <script>
+
+  //Service d’authentification (appel API)
+  import { loginUser } from "../lib/services/auth.service.js";
+
+  //Store global d’authentification
+  import { setAuth } from "../lib/store/auth.svelte.js";
 /*
-  Service d’authentification (appel API)
-  import { loginUser } from "../services/auth.service.js";
-
-  // Store global d’authentification
-  import { setAuth } from "../stores/auth.svelte.js";
-
-  // Navigation après connexion
+  //Navigation après connexion
   import { goto } from "$app/navigation";
 */
-  
   let mail = "";
   let password = "";
 
@@ -34,10 +33,12 @@
         return;
       }
 
-      alert("Connexion réussie 🎉");
-      console.log(data);
-
-      // Réinitialiser le formulaire
+      setAuth(credentials);
+      window.location.href = "/#/compte";
+      alert("Connexion réussie !");
+      
+      
+    // Réinitialiser le formulaire
       mail = password = '';
     } catch (error) {
       console.error(error);
