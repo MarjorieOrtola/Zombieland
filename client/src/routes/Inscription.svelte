@@ -34,9 +34,8 @@
         alert("Erreur : " + (data.message || "Impossible de créer le compte"));
         return;
       }
-
-      alert("Inscription réussie 🎉");
-      console.log(data);
+      alert("Compte créé avec succès !");
+      window.location.href = "/myaccount";
 
       // Réinitialiser le formulaire
       first_name = last_name = mail = password = address = city = postcode = phone_number = '';

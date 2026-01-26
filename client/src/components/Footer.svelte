@@ -1,14 +1,11 @@
 <script> 
-  export let navigate;
 
-  function goTo(page) {
-    navigate(page);
-  }
 </script>
 
 <footer class="footer">
+  
   <!-- Lien FAQ -->
-<a href="#" on:click|preventDefault={() => goTo('Faq')}>FAQ</a>
+<a class="footer__faq"href="/#/faq">FAQ</a>
 
   <p>Suivez-nous sur les réseaux sociaux</p>
 

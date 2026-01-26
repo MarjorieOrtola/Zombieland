@@ -1,29 +1,42 @@
 <script>
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
-  import Attraction from './pages/Attraction.svelte';
-  import Spectacle from './pages/Spectacle.svelte';
-  import Inscription from './pages/Inscription.svelte';
-  import Rencontre_perso from './pages/Rencontre_perso.svelte';
-  import Contact from './pages/Contact.svelte';
-  import Home from './pages/Home.svelte';
-  import Billetterie from './pages/Billetterie.svelte';
-  import Faq from './pages/Faq.svelte';
-  import Compte from './pages/Compte.svelte';
-  import Connexion from './pages/Connexion.svelte';
 
-  let page = 'Inscription';
+  import Home from './routes/Home.svelte';
+  import Contact from './routes/Contact.svelte';
+  import Attraction from './routes/Attraction.svelte';
+  import Spectacle from './routes/Spectacle.svelte';
+  import Inscription from './routes/Inscription.svelte';
+  import Billetterie from './routes/Billetterie.svelte';
+  import Rencontre_perso from './routes/Rencontre_perso.svelte';
+  import Faq from './routes/Faq.svelte';
+  import Compte from './routes/Compte.svelte';
+  import Connexion from './routes/Connexion.svelte';
 
-  const pages = { Contact, Attraction, Home, Spectacle, Inscription, Billetterie, Rencontre_perso, Faq, Compte, Connexion};
+  import Router from 'svelte-spa-router';
+  import { getAuth } from './lib/store/auth.svelte.js';
+  
+  getAuth(); // restaure user/token depuis localStorage au chargement
 
-  function navigate(to) {
-    page = to;
-  }
+  const routes = {
+    '/': Home, /* Point d'entrée obligatoire */
+    '/home': Home,
+    '/contact': Contact,
+    '/attraction': Attraction,
+    '/spectacle': Spectacle,
+    '/inscription': Inscription,
+    '/billetterie': Billetterie,
+    '/rencontre_perso': Rencontre_perso,
+    '/faq': Faq,
+    '/compte': Compte,
+    '/connexion': Connexion,
+  };
 </script>
 
-<Header {navigate} />
 
-<svelte:component this={pages[page]} />
 
-<Footer navigate={navigate} />
+<Header />
 
+<Router {routes} />
+
+<Footer />

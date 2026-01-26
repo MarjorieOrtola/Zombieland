@@ -1,19 +1,38 @@
 <script>
+  import { createTickets } from "../lib/services/ticket.service.js";
+
   let amount = 1;
+  let selectedDate = "";
+  let error = "";
+  let success = "";
 
   function increment() {
     amount += 1;
   }
 
   function decrement() {
-    if (amount > 1) {
-      amount -= 1;
-    }
+    if (amount > 1) amount -= 1;
   }
 
-  function validate() {
-    console.log("Nombre de tickets :", amount);
-   
+  async function validate() {
+    error = "";
+    success = "";
+
+    if (!selectedDate) {
+      error = "Veuillez choisir une date";
+      return;
+    }
+
+    try {
+      await createTickets({
+        date: selectedDate,
+        quantity: amount,
+      });
+
+      success = "Billets réservés avec succès";
+    } catch (err) {
+      error = err.message || "Erreur lors de la réservation";
+    }
   }
 </script>
 
@@ -22,7 +41,14 @@
     <h2 class="activity__title">Choisissez le nombre d'aventures</h2>
     <p>Billet sur une journée complète. Description du billet ici</p>
     <p>Rajouter un calendrier ici pour choisir la date</p>
-
+  <label class="ticket__date-label">
+    Choisissez votre date de visite :
+    <input class="ticket__date-input"
+      type="date"
+      bind:value={selectedDate}
+      min={new Date().toISOString().split("T")[0]}
+    />
+  </label>
     <form class="ticket" on:submit|preventDefault={validate}>
       <label class="ticket__form-label" for="amount">
         Nombre de tickets

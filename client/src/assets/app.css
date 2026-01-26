@@ -238,6 +238,13 @@ h4{
   padding: 1rem;
   color: var(--color-text);
 }
+
+.footer__faq {
+  font-weight: bold;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
 .footer__button{
   background-color: var(--primary);
 
@@ -430,6 +437,17 @@ align-items: center;
   color: var(--color-input);
   width: 100%;
 }
+
+/* page compte */
+
+.compte__profil {
+  color:var(--color-text);
+  margin:0rem;
+  line-height: 0.4;
+  padding: none;
+  text-align: left;
+}
+
 /* page billeterie */
 .ticket{
   display: flex;
@@ -451,6 +469,19 @@ p{
 .ticket__form-label{
   margin-right: 0.5rem;
 }
+.ticket__date-label{
+  color: var(--color-text);
+}
+.ticket__date-input{
+
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: solid darkred 2px;
+  border-radius: 3px;
+  background-color: var(--background-form);
+  color: var(--color-input);
+}
+
 /* page 404 */
 .main__Error{
   display: flex;

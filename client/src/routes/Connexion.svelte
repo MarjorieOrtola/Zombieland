@@ -1,9 +1,20 @@
 <script>
+
+  //Service d’authentification (appel API)
+  import { loginUser } from "../lib/services/auth.service.js";
+
+  //Store global d’authentification
+  import { setAuth } from "../lib/store/auth.svelte.js";
+/*
+  //Navigation après connexion
+  import { goto } from "$app/navigation";
+*/
   let mail = "";
   let password = "";
 
   async function handleSubmitLogin() {
-    const user = {
+    // informations de connexion de l'utilisateur
+    const credentials = {
         mail,
         password,
     };
@@ -12,20 +23,29 @@
       const response = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
+        body: JSON.stringify(credentials),
       });
 
       const data = await response.json();
+
+      console.log("LOGIN status =", response.status);
+      console.log("LOGIN data =", data);
+      console.log("LOGIN data.token =", data.token);
 
       if (!response.ok) {
         alert("Erreur : " + (data.message || "Impossible de créer le compte"));
         return;
       }
 
-      alert("Inscription réussie 🎉");
-      console.log(data);
+      setAuth(null, data.token);
+      window.location.href = "/#/compte";
+      alert("Connexion réussie !");
 
-      // Réinitialiser le formulaire
+      console.log("token saved =", localStorage.getItem("token"));
+
+      
+      
+    // Réinitialiser le formulaire
       mail = password = '';
     } catch (error) {
       console.error(error);
@@ -38,7 +58,7 @@
   <section class="main__login">
     <h2 class="register__title">Connectez-vous</h2>
 
-    <form class="login__form" on:submit|preventDefault={login}>
+    <form class="login__form" on:submit|preventDefault={handleSubmitLogin}>
       <label class="register__form-label" for="mail">Mail</label>
       <input type="email" id="mail" name="mail" bind:value={mail} required />
 
