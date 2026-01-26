@@ -37,7 +37,10 @@ Category.hasMany(Activity,
 User.belongsToMany(Ticket,
     {
         // Nom de la table pivot entre User et Ticket
-        through: Reservation,
+        through: {
+        model: Reservation,
+        unique:false,
+        },
         // On configure la table pivot
         // Clé étrangère dans la table pivot vers la table user
         foreignKey: 'user_id',
