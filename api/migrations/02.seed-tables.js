@@ -1,6 +1,6 @@
 import dotenv from "dotenv"
 import sequelize from "../models/sequelize.client.js";
-import { Activity, Category, User } from "../models/index.js";
+import { Activity, Category, User, Ticket, Reservation } from "../models/index.js";
 
 async function seed(){
     console.log('Syncing database...')
@@ -54,7 +54,7 @@ async function seed(){
     });
 
 // Test création d'un compte utilisateur en dur
-    await User.create({
+    const user = await User.create({
         first_name: 'Frank',
         last_name: 'Kenstein',
         password: 'azerty123',
@@ -66,11 +66,23 @@ async function seed(){
     });
 
 // Creation du Ticket d'entrée unique 
-    await Ticket.create({
+    const ticket = await Ticket.create({
         name: 'Entrée unique',
         price: 50.00,
-        date_entrance: con = new Date(),
+        date_entrance: new Date(),
     });
+
+// Creation d'une nouvelle réservation
+// Générer un numéro aléatoire pour la référence, par exemple 6 chiffres
+    const randomReference = Math.floor(100000 + Math.random() * 900000);
+
+    await user.addTicket(ticket, {
+      through: {
+        quantity: 2,       // nombre de tickets réservés
+        reference: randomReference, // référence arbitraire
+        // date_reservation sera automatique grâce à createdAt renommé
+      },
+    });    
 
     console.log('✅ Seeding complete!');
     } catch (error) {
