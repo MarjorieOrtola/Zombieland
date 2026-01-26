@@ -437,6 +437,17 @@ align-items: center;
   color: var(--color-input);
   width: 100%;
 }
+
+/* page compte */
+
+.compte__profil {
+  color:var(--color-text);
+  margin:0rem;
+  line-height: 0.4;
+  padding: none;
+  text-align: left;
+}
+
 /* page billeterie */
 .ticket{
   display: flex;

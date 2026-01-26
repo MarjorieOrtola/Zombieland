@@ -44,10 +44,6 @@
         <section class="main__compte">
             <h2 class="compte__title">Mon compte</h2>
 
-            <p class="compte__text">
-            Ici relier les informations du compte utilisateur lors de l'inscription (nom, prénom, email, mot de passe) avec possibilité de les modifier.
-            </p>
-
             <!-- Exemple affichage profil -->
            {#if error}
             <p>{error}</p>
