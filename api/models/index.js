@@ -3,6 +3,7 @@ import Activity from './activity.model.js';
 import Category from './category.model.js';
 import Ticket from './ticket.model.js';
 import User from './user.model.js';
+import Reservation from './reservation.model.js';
 
 // Association 1 - N
 // 1 Activité appartient à 1 Catégorie
@@ -36,7 +37,7 @@ Category.hasMany(Activity,
 User.belongsToMany(Ticket,
     {
         // Nom de la table pivot entre User et Ticket
-        through: 'reservation',
+        through: Reservation,
         // On configure la table pivot
         // Clé étrangère dans la table pivot vers la table user
         foreignKey: 'user_id',
@@ -49,7 +50,7 @@ User.belongsToMany(Ticket,
 Ticket.belongsToMany(User,
     {
         // Nom de la table pivot entre User et Ticket
-        through: 'reservation',
+        through: Reservation,
         // On configure la table pivot
         // Clé étrangère dans la table pivot vers la table user
         foreignKey: 'ticket_id',
@@ -60,4 +61,4 @@ Ticket.belongsToMany(User,
     });
 
 // Ici on fait l'export des Modèles enrichit de leurs relations entre eux eux
-export { Activity, Category, Ticket, User }
+export { Activity, Category, Ticket, User, Reservation }

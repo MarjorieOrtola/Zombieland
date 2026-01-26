@@ -17,18 +17,23 @@ Ticket.init(
             type: DataTypes.STRING(50),
             // Null interdit
             allowNull: false,
+            defaultValue:"Pass journée"
         },
         price: {
             // type integer
             type: DataTypes.INTEGER,
             // Null interdit
             allowNull: false,
+            //Valeur par défaut
+            defaultValue: 50
         },
         date_entrance: {
             // Type date
             type: DataTypes.DATE,
             // Null interdit
             allowNull: false,
+            // Valeur par défaut car la date sera choisie par l'utilisateur
+            defaultValue: new Date(),
         },
     },
     // modelName ==> nom de la table à créer

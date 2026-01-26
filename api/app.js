@@ -12,6 +12,7 @@ import attractionRouter from './routes/attraction.router.js';
 import spectacleRouter from './routes/spectacle.router.js';
 import personnageRouter from './routes/personnage.router.js';
 import authRouter from './routes/auth.router.js';
+import ticketRouter from './routes/ticket.router.js';
 
 // import cors  
 import cors from 'cors';
@@ -37,6 +38,7 @@ app.use(authRouter);
 app.use(attractionRouter);
 app.use(spectacleRouter);
 app.use(personnageRouter);
+app.use(ticketRouter);
 // Après le router des authentification
 // Ajoute le validateToken
 // Toutes les routes qui sont ajoutée après cette instruction sont protégée par un token
