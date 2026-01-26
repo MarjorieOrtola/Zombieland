@@ -28,14 +28,21 @@
 
       const data = await response.json();
 
+      console.log("LOGIN status =", response.status);
+      console.log("LOGIN data =", data);
+      console.log("LOGIN data.token =", data.token);
+
       if (!response.ok) {
         alert("Erreur : " + (data.message || "Impossible de créer le compte"));
         return;
       }
 
-      setAuth(credentials);
+      setAuth(null, data.token);
       window.location.href = "/#/compte";
       alert("Connexion réussie !");
+
+      console.log("token saved =", localStorage.getItem("token"));
+
       
       
     // Réinitialiser le formulaire

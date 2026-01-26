@@ -5,17 +5,17 @@
 // éviter de mettre des fetch() dans les composants Svelte
 // faire le lien entre API et authStore
 
-import api from "../api";
+import api from "../api.js";
 
 export const registerUser = async (user) => {
   return await api("/register", "POST", user);
 };
 
-export const loginUser = async () => {
+export const loginUser = async (credentials) => {
 
   // credentials : un objet littéral avec clé mail et password pour le nom et le mdp de connexion
   // exemple : { username: 'Josiane', password: 'azertyuiop' }
-  const { token } = await api("/login", "POST", { mail, password });
+const { token } = await api("/login", "POST", credentials);
 
   // affiche le token
   // le token est représenté par une grande chaîne de caractères

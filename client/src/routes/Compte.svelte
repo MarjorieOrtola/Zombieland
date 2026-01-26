@@ -9,6 +9,7 @@
 
       const token = localStorage.getItem("token");
 
+
       if (!token) {
         error = "Pas connecté";
         return;
