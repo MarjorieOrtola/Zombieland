@@ -1,7 +1,7 @@
 import { User, Ticket, Reservation } from "../models/index.js";
 import HttpError from "../utils/HttpError.js";
 
-const ticketController = {
+const reservationController = {
   async getTicket(req, res) {
     try {
       const tickets = await Ticket.findAll();
@@ -26,8 +26,9 @@ const ticketController = {
       const ticket = await Ticket.findByPk(ticket_id);
       if (!ticket) throw new HttpError("Ticket introuvable", 404);
 
-      // Mise à jour de la date choisie par l'utilisateur
-      await ticket.update({ date_entrance });
+      if (!date_entrance) {
+        throw new HttpError("Date de visite obligatoire", 400);
+      }
 
       const randomReference = Math.floor(100000 + Math.random() * 900000);
 
@@ -36,6 +37,7 @@ const ticketController = {
         user_id: user.id,
         ticket_id: ticket.id,
         quantity,
+        date_entrance,
         reference: randomReference,
       });
 
@@ -47,7 +49,7 @@ const ticketController = {
         quantity: reservationCreated.quantity,
         reference: reservationCreated.reference,
         date_reservation: reservationCreated.date_reservation,
-        date_entrance: ticket.date_entrance,
+        date_entrance: reservationCreated.date_entrance,
       });
     } catch (error) {
       next(error);
@@ -55,4 +57,4 @@ const ticketController = {
   },
 };
 
-export default ticketController;
+export default reservationController;

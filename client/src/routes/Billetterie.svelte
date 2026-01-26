@@ -1,10 +1,12 @@
 <script>
   import { createTickets } from "../lib/services/ticket.service.js";
-
+ 
+  let loading = false;
   let amount = 1;
   let selectedDate = "";
   let error = "";
   let success = "";
+  const ticketId = 1;
 
   function increment() {
     amount += 1;
@@ -17,22 +19,32 @@
   async function validate() {
     error = "";
     success = "";
+    
 
     if (!selectedDate) {
       error = "Veuillez choisir une date";
       return;
     }
+    loading = true;
 
     try {
       await createTickets({
-        date: selectedDate,
+        ticket_id: ticketId,
+        date_entrance: selectedDate,
         quantity: amount,
       });
 
       success = "Billets réservés avec succès";
+      setTimeout(() => {
+      window.location.href = "/#/compte";
+    }, 500);
+     
+
     } catch (err) {
       error = err.message || "Erreur lors de la réservation";
-    }
+    }finally {
+    loading = false;
+  }
   }
 </script>
 
@@ -81,9 +93,10 @@
         </button>
       </div>
 
-      <button class="register__form-button" type="submit">
-        Valider
-      </button>
+      <button class="register__form-button" type="submit" disabled={loading}>
+  {loading ? "Réservation..." : "Valider"}
+</button>
+
     </form>
   </section>
 </main>
