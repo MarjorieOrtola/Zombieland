@@ -121,7 +121,7 @@ async login(req,res,next){
  async getMyAccount(req, res, next) {
   try {
     // ID utilisateur extrait du token
-    const userId = req.user_id;
+    const userId = req.user.id;
 
     console.log('\nGET ME - userId:', userId);
 
