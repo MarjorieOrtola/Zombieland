@@ -51,6 +51,7 @@ export function validateLogin(req, res, next) {
 	// Je ne suis pas rentré dans le IF, le body est valide donc j'appel le middleware suivant
 	next();
 }
+
 export function validateToken(req, res, next) {
 
 	// 1. chercher le token qui est dans l'entête HTTP de la requete
@@ -80,15 +81,9 @@ export function validateToken(req, res, next) {
 			throw new HttpError("Authorization token missing or invalid", 401)
 		}
 
-		// token valide !
-		// decoded contient les données du token :  {
-		// 		"user_id": 1,
-		//  	"iat": 1765961377,
-		//		"exp": 1765964977
-		//	}
-		// 5. Ajouter dans la requete (req) une nouvelle constante "user_id" qui contient l'id de l'utilisateur
-		// cet id est extrait des valeurs du token
-		req.user_id = decoded.user_id;
+		req.user = {
+      		id: decoded.user_id,
+    	};
 		// 5. passe au middleware suivante
 		next();
 	});

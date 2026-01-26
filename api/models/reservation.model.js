@@ -8,26 +8,29 @@ class Reservation extends Model {}
 
 // Création de la table Reservation
 Reservation.init(
-    {
-        date_reservation: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: DataTypes.NOW, // Date de création par défaut
-        },
-        reference: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        quantity:{
-            type:DataTypes.INTEGER,
-            allowNull:false,
-        }
-    
-    
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,  // clé primaire auto-incrémentée
     },
-
-    // Nom de la table
-    { sequelize, modelName: 'reservation', }
+    reference: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    modelName: "reservation",
+    tableName: "reservation",
+    timestamps: true,
+    createdAt: "date_reservation",
+    updatedAt: false,
+  }
 );
 
 export default Reservation;
