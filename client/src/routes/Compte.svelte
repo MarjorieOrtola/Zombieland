@@ -86,18 +86,7 @@
         <ul>
           {#each user.reservations as r}
             <li class="compte__reservation">
-              {r.ticket.name} — {r.date_entrance} — 
-              <span class="compte__bold">{r.quantity} billet{r.quantity > 1 ? 's' : ''}</span> — 
-              Réf: {r.reference}
-
-              <button
-                class="btn-supprimer"
-                on:click={() => handleDelete(r.id)}
-                disabled={!canDeleteReservation(r.date_entrance)}
-                title={!canDeleteReservation(r.date_entrance) ? "Impossible de supprimer moins de 10 jours avant la visite" : ""}
-              >
-                Supprimer
-              </button>
+              {r.ticket.name} — {r.date_entrance} — <span class="compte__bold">{r.quantity} billets</span> — Réf: {r.reference}
             </li>
           {/each}
         </ul>
@@ -105,11 +94,6 @@
         <p>Aucune réservation</p>
       {/if}
 
-    {:else if error}
-      <p>{error}</p>
-    {:else}
-      <p>Chargement...</p>
-    {/if}
   </section>
 </main>
 

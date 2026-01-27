@@ -15,6 +15,7 @@
   import Faq from './routes/Faq.svelte';
   import Compte from './routes/Compte.svelte';
   import Connexion from './routes/Connexion.svelte';
+  import Detail from './routes/Detail.svelte';
 
   // Pas besoin d'appeler getAuth(), l'état est déjà restauré à l'import du store
 
@@ -30,6 +31,7 @@
     '/faq': Faq,
     '/compte': Compte,
     '/connexion': Connexion,
+    '/detail/:id' : Detail,
   };
 </script>
 

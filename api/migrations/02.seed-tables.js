@@ -10,20 +10,22 @@ async function seed(){
     const personnage = await Category.create({name: 'personnage'});
 
     // Création de chaque ligne dans la table Activity en les liant à leurs category (attraction, spectacle et personnage)
-    await Activity.create({
+    const deadRise = await Activity.create({
         name: 'Dead Rise',
         fear_level: 5,
         image: 1,
         description: 'Dead Rise est un roller coaster terrifiant qui plonge les visiteurs dans un univers post-apocalyptique envahi par les morts-vivants. Dès l’embarquement, la tension monte entre lumières vacillantes, cris lointains et silhouettes de zombies surgissant de l’ombre. Les virages serrés, descentes brutales et accélérations soudaines s’enchaînent sans répit, donnant l’impression d’une fuite désespérée face à une horde toujours plus proche. Chaque montée est une fausse accalmie avant une chute vertigineuse, faisant de Dead Rise bien plus qu’un manège : une véritable expérience de survie.',
         category_id: attraction.id,
     });
-    await Activity.create({
+    console.log(deadRise.id);
+    const labyrinthe = await Activity.create({
         name: 'Le labyrinthe des Zombies',
         fear_level: 4,
         image: 2,
         description: 'Le Labyrinthe des Zombies plonge les visiteurs au cœur d’un dédale sombre et oppressant où chaque détour peut être le dernier. Entre couloirs étroits, brume épaisse et décors délabrés, des zombies surgissent à tout moment, rendant la progression imprévisible et angoissante. Les cris, les lumières instables et les effets sonores accentuent la tension à chaque pas, obligeant les participants à rester constamment sur leurs gardes. Perdre son chemin devient facile, mais en sortir indemne est un véritable défi de survie.',
         category_id: attraction.id,
     });
+    console.log(labyrinthe.id);
     await Activity.create({
         name: 'Le lâcher de Zombies',
         fear_level: 4,
