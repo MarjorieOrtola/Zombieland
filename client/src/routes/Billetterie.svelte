@@ -21,11 +21,6 @@
     success = "";
     
 
-    if (!selectedDate) {
-      error = "Veuillez choisir une date";
-      return;
-    }
-    loading = true;
 
     try {
       await createTickets({
