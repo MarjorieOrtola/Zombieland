@@ -80,6 +80,7 @@ async function seed(){
       through: {
         quantity: 2,       // nombre de tickets réservés
         reference: randomReference, // référence arbitraire
+        date_entrance: new Date(),
         // date_reservation sera automatique grâce à createdAt renommé
       },
     });    
