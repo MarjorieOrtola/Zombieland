@@ -62,8 +62,8 @@
       {#if user.reservations.length > 0}
         <ul>
           {#each user.reservations as r}
-            <li>
-              {r.ticket.name} — {r.date_entrance} — {r.quantity} billets — Réf: {r.reference}
+            <li class="compte__reservation">
+              {r.ticket.name} — {r.date_entrance} — <span class="compte__bold">{r.quantity} billets</span> — Réf: {r.reference}
             </li>
           {/each}
         </ul>
