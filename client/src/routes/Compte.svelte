@@ -55,12 +55,13 @@
   }
 
   // Vérifie si la réservation peut être supprimée
-  function canDeleteReservation(date_entrance) {
-    const today = new Date();
-    const visitDate = new Date(date_entrance);
-    const diffDays = Math.ceil((visitDate - today) / (1000 * 60 * 60 * 24));
-    return diffDays > 10;
-  }
+ function canDeleteReservation(date_entrance) {
+  const today = new Date();
+  const visitDate = new Date(date_entrance); // string → Date
+  const diffTime = visitDate.getTime() - today.getTime(); // en ms
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays > 10;
+}
 </script>
 
 <main class="main">
