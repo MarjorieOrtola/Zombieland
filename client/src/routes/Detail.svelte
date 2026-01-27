@@ -10,7 +10,7 @@
 
   onMount(async () => {
     try {
-      activity = await api(`/detail/${params.id}`); // récupère l'activité via son ID
+      activity = await api(`/attraction/${params.id}`); // récupère l'activité via son ID
     } catch (e) {
       console.error(e);
       error = "Activité introuvable";
