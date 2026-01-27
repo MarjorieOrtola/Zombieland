@@ -1,57 +1,25 @@
 <script>
+  import authStore, { setAuth } from '../lib/store/authStore.js';
+import { loginUser } from '../lib/services/auth.service.js';
 
-  //Service d’authentification (appel API)
-  import { loginUser } from "../lib/services/auth.service.js";
 
-  //Store global d’authentification
-  import { setAuth } from "../lib/store/auth.svelte.js";
-/*
-  //Navigation après connexion
-  import { goto } from "$app/navigation";
-*/
-  let mail = "";
-  let password = "";
+  let mail = '';
+  let password = '';
+  let error = '';
 
-  async function handleSubmitLogin() {
-    // informations de connexion de l'utilisateur
-    const credentials = {
-        mail,
-        password,
-    };
+ async function handleSubmitLogin() {
+  try {
+    const { token, user } = await loginUser({ mail, password });
 
-    try {
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(credentials),
-      });
-
-      const data = await response.json();
-
-      console.log("LOGIN status =", response.status);
-      console.log("LOGIN data =", data);
-      console.log("LOGIN data.token =", data.token);
-
-      if (!response.ok) {
-        alert("Erreur : " + (data.message || "Impossible de créer le compte"));
-        return;
-      }
-
-      setAuth(null, data.token);
-      window.location.href = "/#/compte";
-      alert("Connexion réussie !");
-
-      console.log("token saved =", localStorage.getItem("token"));
-
-      
-      
-    // Réinitialiser le formulaire
-      mail = password = '';
-    } catch (error) {
-      console.error(error);
-      alert("Erreur réseau ou serveur. Vérifiez la console.");
-    }
+    console.log("Token reçu :", token); // Debug
+    console.log("User reçu :", user);   // Debug
+    setAuth(user, token);
+    window.location.href = '/#/compte';
+  } catch (err) {
+    console.error("Erreur complète :", err); // Debug
+    error = err.message || 'Erreur réseau ou serveur';
   }
+}
 </script>
 
 <main class="main">
@@ -60,14 +28,32 @@
 
     <form class="login__form" on:submit|preventDefault={handleSubmitLogin}>
       <label class="register__form-label" for="mail">Mail</label>
-      <input type="email" id="mail" name="mail" bind:value={mail} required />
+      <input
+        type="email"
+        id="mail"
+        name="mail"
+        bind:value={mail}
+        placeholder="Entrez votre mail"
+        required
+      />
 
       <label class="register__form-label" for="password">Mot de passe</label>
-      <input type="password" id="password" name="password" bind:value={password} required />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        bind:value={password}
+        placeholder="Entrez votre mot de passe"
+        required
+      />
 
       <button class="register__form-button" type="submit">
         Se Connecter
       </button>
     </form>
+
+    {#if error}
+      <p style="color:red; margin-top:10px">{error}</p>
+    {/if}
   </section>
 </main>
