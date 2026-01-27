@@ -5,32 +5,34 @@
   let user = null;
   let error = "";
 
-  // Fonction pour se déconnecter sans recharger la page
   function logout() {
-    localStorage.removeItem("token"); // supprime le token
-    user = null;                       // réinitialise l'utilisateur
-    error = "Vous êtes déconnecté";    // message optionnel
+    localStorage.removeItem("token");
+    user = null;
+    error = "Vous êtes déconnecté";
   }
 
-  // Supprimer une réservation
   async function handleDelete(reservationId) {
     if (!confirm("Voulez-vous vraiment supprimer cette réservation ?")) return;
 
     try {
       await deleteReservation(reservationId);
       alert("Réservation supprimée !");
-      // Mise à jour de la liste des réservations
       user.reservations = user.reservations.filter(r => r.id !== reservationId);
     } catch (err) {
       alert(err.message || "Erreur lors de la suppression");
     }
   }
 
-  // Récupérer les informations de l'utilisateur
+  function canDeleteReservation(date_entrance) {
+    const today = new Date();
+    const visitDate = new Date(date_entrance);
+    const diffDays = Math.ceil((visitDate - today) / (1000 * 60 * 60 * 24));
+    return diffDays > 10;
+  }
+
   async function fetchUser() {
     try {
       const token = localStorage.getItem("token");
-
       if (!token) {
         error = "Pas connecté";
         user = null;
@@ -38,22 +40,20 @@
       }
 
       const res = await fetch(`${import.meta.env.VITE_API_URL}/myaccount`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (!res.ok) {
         const message = await res.text();
         console.error("Erreur API:", message);
         error = "Token invalide ou expiré";
-        localStorage.removeItem("token"); // nettoyage automatique
+        localStorage.removeItem("token");
         user = null;
         return;
       }
 
       user = await res.json();
-      error = ""; // clear errors
+      error = "";
     } catch (err) {
       console.error(err);
       error = "Erreur serveur";
@@ -61,33 +61,12 @@
     }
   }
 
-  onMount(() => {
-    fetchUser();
-  });
+  onMount(() => fetchUser());
 </script>
 
 <main class="main">
   <section class="main__compte">
-    <h2 class="compte__title">Mon compte</h2>
-
-    {#if error && !user}
-      <p>{error}</p>
-    {/if}
-
     {#if user}
-      <div class="compte__profil">
-        <p><strong>Prénom :</strong> {user.first_name}</p>
-        <p><strong>Nom :</strong> {user.last_name}</p>
-        <p><strong>Email :</strong> {user.mail}</p>
-        <p><strong>Adresse :</strong> {user.address}</p>
-        <p><strong>Ville :</strong> {user.city}</p>
-        <p><strong>Code postal :</strong> {user.postcode}</p>
-      </div>
-
-      <button on:click={logout} class="btn-logout">
-        Déconnexion
-      </button>
-
       <h3>Réservations</h3>
       {#if user.reservations.length > 0}
         <ul>
@@ -97,8 +76,12 @@
               <span class="compte__bold">{r.quantity} billet{r.quantity > 1 ? 's' : ''}</span> — 
               Réf: {r.reference}
 
-              <!-- Bouton Supprimer -->
-              <button class="btn-supprimer" on:click={() => handleDelete(r.id)}>
+              <button 
+                class="btn-supprimer" 
+                on:click={() => handleDelete(r.id)} 
+                disabled={!canDeleteReservation(r.date_entrance)}
+                title={!canDeleteReservation(r.date_entrance) ? "Impossible de supprimer moins de 10 jours avant la visite" : ""}
+              >
                 Supprimer
               </button>
             </li>
@@ -109,6 +92,10 @@
       {/if}
     {/if}
 
+    {#if error && !user}
+      <p>{error}</p>
+    {/if}
+
     {#if !user && !error}
       <p>Chargement...</p>
     {/if}
@@ -116,21 +103,6 @@
 </main>
 
 <style>
-.btn-logout {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #e63946;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-logout:hover {
-  background-color: #d62828;
-}
-
-/* Style du bouton Supprimer */
 .btn-supprimer {
   margin-left: 1rem;
   padding: 5px 10px;
@@ -142,7 +114,12 @@
   font-size: 0.85rem;
 }
 
-.btn-supprimer:hover {
+.btn-supprimer:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.btn-supprimer:hover:enabled {
   background-color: #d66a00;
 }
 </style>

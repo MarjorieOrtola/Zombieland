@@ -56,27 +56,37 @@ const reservationController = {
     }
   },
 
- async deleteReservation(req, res, next) {
-    try {
-      const reservationId = req.params.id;
-      const userId = req.user.id; // récupéré via validateToken
+async deleteReservation(req, res, next) {
+  try {
+    const userId = req.user.id;        // utilisateur connecté
+    const reservationId = req.params.id;
 
-      // Vérifie que la réservation existe et appartient à l'utilisateur
-      const reservation = await Reservation.findOne({
-        where: { id: reservationId, user_id: userId },
-      });
+    // Récupérer la réservation
+    const reservation = await Reservation.findOne({
+      where: { id: reservationId, user_id: userId }
+    });
 
-      if (!reservation) {
-        return res.status(404).json({ message: "Réservation introuvable" });
-      }
-
-      await reservation.destroy();
-
-      res.status(200).json({ message: "Réservation supprimée avec succès" });
-    } catch (err) {
-      next(err);
+    if (!reservation) {
+      return res.status(404).json({ message: "Réservation introuvable" });
     }
-  },
-};
+
+    // Vérifier la date limite (10 jours avant la date de visite)
+    const today = new Date();
+    const visitDate = new Date(reservation.date_entrance);
+    const diffDays = Math.ceil((visitDate - today) / (1000 * 60 * 60 * 24)); // nombre de jours restants
+
+    if (diffDays <= 10) {
+      return res.status(400).json({ message: "Impossible de supprimer la réservation moins de 10 jours avant la visite." });
+    }
+
+    await reservation.destroy(); // supprime la réservation
+
+    res.json({ message: "Réservation supprimée avec succès" });
+  } catch (err) {
+    next(err);
+  }
+}
+}
+
 
 export default reservationController;
