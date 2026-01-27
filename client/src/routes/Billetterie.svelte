@@ -156,4 +156,20 @@
     color: green;
     font-weight: bold;
   }
+
+  .ticket__date-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 0.5rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.ticket__date-input {
+  text-align: center;
+  width: 160px;        
+}
+
+
 </style>

@@ -1,46 +1,37 @@
-// C’est la couche métier (service) dédiée à l’authentification côté front.
-// Il sert à :
-// communiquer avec les routes / du backend
-// centraliser la logique login / register / myaccount
-// éviter de mettre des fetch() dans les composants Svelte
-// faire le lien entre API et authStore
-
+// lib/services/auth.service.js
 import api from "../api.js";
+import { setAuth } from "../store/authStore.js";
 
-export const registerUser = async (user) => {
-  return await api("/register", "POST", user);
-};
-
+/**
+ * Connecte un utilisateur et récupère token + user
+ * credentials: { mail, password }
+ */
 export const loginUser = async (credentials) => {
+  // 1 login pour récupérer le token
+  const { token } = await api("/login", "POST", credentials);
 
-  // credentials : un objet littéral avec clé mail et password pour le nom et le mdp de connexion
-  // exemple : { username: 'Josiane', password: 'azertyuiop' }
-const { token } = await api("/login", "POST", credentials);
+  // 2 stocker le token immédiatement dans le store pour que api() l'utilise
+  setAuth(null, token);
 
-  // affiche le token
-  // le token est représenté par une grande chaîne de caractères
-  // console.log(token);
-  // alert(token);
+  // 3 récupérer les infos utilisateur
+  const user = await api("/myaccount", "GET");
 
-  // Demande des informations de l'utilisateur : username + role
-  const user = await fetch(`${import.meta.env.VITE_API_URL}/myaccount`, {
-    method: "GET",
-    headers: {
-      // entête sous forme de clé / valeur ==> Authorization: "Bearer <token>"
-      Authorization: `Bearer ${token}`, // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE3NjU5NjEzNzcsImV4cCI6MTc2NTk2NDk3N30.t9_Iare4Fh7CG59hpjHtSesnbAG1HzEFErAI5hNtdVo
-    },
-  })
-  .then((res) => res.json());
-
-  // console.log(user);
-  // alert(JSON.stringify(user));
-
+  // 4 mettre à jour le store avec le user complet
+  setAuth(user, token);
 
   return { token, user };
-
-  // return { token };
 };
 
+/**
+ * Récupère l'utilisateur connecté
+ */
 export const getUser = async () => {
   return await api("/myaccount", "GET");
+};
+
+/**
+ * Inscription d'un nouvel utilisateur
+ */
+export const registerUser = async (user) => {
+  return await api("/register", "POST", user);
 };
