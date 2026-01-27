@@ -72,23 +72,5 @@
       {/if}
     {/if}
 
-    <!-- Exemple liste billets -->
-    <!---
-            <ul class="compte__tickets">
-            {#each tickets as ticket}
-                <li class="compte__ticket">
-                <span>{ticket.date} — {ticket.name}</span>
-
-                <button type="button" on:click={() => downloadTicket(ticket)} disabled={!ticket.downloadable}>
-                    Télécharger
-                </button>
-                
-                <button type="button" on:click={() => deleteTicket(ticket)} disabled={!ticket.deletable}>
-                    Supprimer
-                </button>
-                </li>
-            {/each}
-            </ul>
-        -->
   </section>
 </main>
