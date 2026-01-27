@@ -1,14 +1,24 @@
 <script>
+
+ import { push } from "svelte-spa-router";
+
 const activities = [
-    {
-      title: 'DEAD RISE',
-      img: '/img/deadrise.jpg'
-    },
-    {
-      title: 'LABYRINTHE DES ZOMBIES',
-      img: '/img/Labyrinthe.png'
-    }
-  ];
+  {
+    id: 1,
+    title: 'DEAD RISE',
+    img: '/img/deadrise.jpg'
+  },
+  {
+    id: 2,
+    title: 'LABYRINTHE DES ZOMBIES',
+    img: '/img/Labyrinthe.png'
+  }
+];
+
+  function goToDetail(id) {
+    push(`/detail/${id}`);
+  }
+
  </script>
 
 <main class="main">
@@ -18,9 +28,9 @@ const activities = [
 
       <img class="activity__img" src={activity.img} alt="Image du parc" />
 
-      <button class="main__button-info" type="button">
-        Plus d'informations
-      </button>
+<button on:click={() => goToDetail(activity.id)}>
+  Plus d'informations
+</button>
     </section>
   {/each}
 </main>

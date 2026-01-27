@@ -12,6 +12,7 @@
   import Faq from './routes/Faq.svelte';
   import Compte from './routes/Compte.svelte';
   import Connexion from './routes/Connexion.svelte';
+  import Detail from './routes/Detail.svelte';
 
   import Router from 'svelte-spa-router';
   import { getAuth } from './lib/store/auth.svelte.js';
@@ -30,6 +31,7 @@
     '/faq': Faq,
     '/compte': Compte,
     '/connexion': Connexion,
+    '/detail/:id' : Detail,
   };
 </script>
 
