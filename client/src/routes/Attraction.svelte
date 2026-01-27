@@ -1,17 +1,19 @@
 <script>
   import { onMount } from "svelte";
   import { push } from "svelte-spa-router";
-  import api from "../lib/api";
+  import { getAttractions } from "../lib/services/attractions.service.js";
 
   let activities = [];
   let error = "";
+ 
 
-  onMount(async () => {
+   onMount(async () => {
     try {
-      activities = await api("/attractions");
+      activities = await getAttractions();
     } catch (e) {
       error = "Impossible de charger les attractions";
-    }
+    } 
+    
   });
 
 </script>
