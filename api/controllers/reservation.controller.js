@@ -2,7 +2,7 @@ import { User, Ticket, Reservation } from "../models/index.js";
 import HttpError from "../utils/HttpError.js";
 
 const reservationController = {
-  async getTicket(req, res) {
+  async getTickets(req, res) {
     try {
       const tickets = await Ticket.findAll();
       res.json(tickets);
@@ -32,7 +32,7 @@ const reservationController = {
 
       const randomReference = Math.floor(100000 + Math.random() * 900000);
 
-      // 🔹 Création directe dans la table pivot
+      // Création directe dans la table pivot
       const reservationCreated = await Reservation.create({
         user_id: user.id,
         ticket_id: ticket.id,
@@ -53,6 +53,28 @@ const reservationController = {
       });
     } catch (error) {
       next(error);
+    }
+  },
+
+ async deleteReservation(req, res, next) {
+    try {
+      const reservationId = req.params.id;
+      const userId = req.user.id; // récupéré via validateToken
+
+      // Vérifie que la réservation existe et appartient à l'utilisateur
+      const reservation = await Reservation.findOne({
+        where: { id: reservationId, user_id: userId },
+      });
+
+      if (!reservation) {
+        return res.status(404).json({ message: "Réservation introuvable" });
+      }
+
+      await reservation.destroy();
+
+      res.status(200).json({ message: "Réservation supprimée avec succès" });
+    } catch (err) {
+      next(err);
     }
   },
 };

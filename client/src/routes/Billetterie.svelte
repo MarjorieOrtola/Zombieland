@@ -24,7 +24,7 @@
 
     // Vérification connexion
     if (!token) {
-      error = "Vous devez être connecté pour réserver des billets !";
+      error = "Veuillez vous connecter ou vous inscrire pour acheter des billets.";
       return;
     }
 
@@ -41,6 +41,7 @@
         ticket_id: ticketId,
         date_entrance: selectedDate,
         quantity: amount,
+        token, // On passe le token à la requête
       });
 
       success = "Billets réservés avec succès ! Redirection en cours…";
@@ -51,12 +52,17 @@
       }, 1500);
 
     } catch (err) {
-      error = err.message || "Erreur lors de la réservation";
+      if (err.message.includes("Unauthorized")) {
+        error = "Veuillez vous connecter pour réserver des billets.";
+      } else {
+        error = err.message || "Erreur lors de la réservation";
+      }
     } finally {
       loading = false;
     }
   }
 </script>
+
 
 <main class="main">
   <section class="main__activity">
