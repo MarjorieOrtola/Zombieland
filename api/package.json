@@ -28,13 +28,15 @@
   "homepage": "https://github.com/O-clock-Florence/projet-zombieland#readme",
   "dependencies": {
     "argon2": "^0.44.0",
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "express-xss-sanitizer": "^2.0.1",
     "joi": "^18.0.2",
     "jsonwebtoken": "^9.0.3",
-    "pg": "^8.17.1",
+    "pg": "^8.17.2",
+    "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.7",
     "xss": "^1.0.15"
   },

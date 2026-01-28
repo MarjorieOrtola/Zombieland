@@ -4,15 +4,18 @@ import 'dotenv/config';
 import express from "express";
 
 
-// Import le middlewre qui vérifie les tokens
+// Import le middleware qui vérifie les tokens
 import { validateToken } from './middlewares/auth.middleware.js';
 
+// Import le middleware qui protège accès admin
+import adminMiddleware from "./middlewares/adminMiddleware.js";
+
 // Import local modules
-import attractionRouter from './routes/attraction.router.js';
-import spectacleRouter from './routes/spectacle.router.js';
-import personnageRouter from './routes/personnage.router.js';
+import activityRouter from './routes/activity.router.js';
 import authRouter from './routes/auth.router.js';
 import reservationRouter from './routes/reservation.router.js';
+import adminRouter from './routes/admin.router.js'
+
 
 // import cors  
 import cors from 'cors';
@@ -35,16 +38,15 @@ app.use(xss());
 
 // Router inscription + authentification
 app.use(authRouter);
-app.use(attractionRouter);
-app.use(spectacleRouter);
-app.use(personnageRouter);
+app.use(activityRouter);
 app.use(reservationRouter);
 // Après le router des authentification
 // Ajoute le validateToken
 // Toutes les routes qui sont ajoutée après cette instruction sont protégée par un token
 // cad, les clients doivent être connecté pour accéder aux routes déclarées après
 app.use(validateToken);
-
+app.use(adminMiddleware);
+app.use(adminRouter);
 //Route test
 app.get('/', (req, res) => {
     res.send("Hello World");

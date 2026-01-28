@@ -91,10 +91,11 @@ const authController = {
       // process.env.JWT_SECRET ==> va chercher le secret qui est dans .env
       const token = jwt.sign(
         // Les données à mettre dans le token ==> PAYLOAD (charge utile)
-        {
-          // Id de l'utilisateur
-          user_id: userFromBDD.id,
-        },
+          {
+        user_id: userFromBDD.id,
+        mail: userFromBDD.mail,   // utile pour afficher dans le front
+        role: userFromBDD.role,   // indispensable pour le back-office
+      },
         // Le secret pour calculer le token
         process.env.JWT_SECRET, // Le secret que j'ai découvert de l'API
         // Date d'expiration du token : le token expire dans une heure !
