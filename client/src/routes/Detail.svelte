@@ -10,7 +10,7 @@
 
   onMount(async () => {
     try {
-      activity = await api(`/attraction/${params.id}`); // récupère l'activité via son ID
+      activity = await api(`/attractions/${params.id}`); // récupère l'activité via son ID
     } catch (e) {
       console.error(e);
       error = "Activité introuvable";
@@ -28,6 +28,6 @@
   {:else}
     <h2>{activity.name}</h2>
     <p>{activity.description}</p>
-    <img src={activity.imageUrl} alt={activity.name} />
+    <img src={`/img/${activity.image}.jpg`} alt={activity.name} />
   {/if}
 </main>

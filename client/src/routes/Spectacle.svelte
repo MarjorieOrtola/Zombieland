@@ -1,26 +1,46 @@
 <script>
-    const activities = [
-    {
-      title: 'MASSACRE A LA TRONCONNEUSE',
-      img: '/img/massacreàlatronconneuse.jpg'
-    },
-    {
-      title: 'LACHER DE ZOMBIES',
-      img: '/img/Lacherdezombies.jpg'
-    }
-  ];
+    import { onMount } from "svelte";
+    import { push } from "svelte-spa-router";
+    import { getSpectacles } from "../lib/services/spectacle.service.js";
+
+    let activities = [];
+    let error = "";
+
+    
+   onMount(async () => {
+    try {
+     activities = await getSpectacles(); // Fetch la liste des spectacles
+    } catch (e) {
+      error = "Impossible de charger les spectacles";
+    } 
+    
+  });
+
 </script>
 
-    <main class="main">
-  {#each activities as activity}
-    <section class="main__activity">
-      <h2 class="activity__title">{activity.title}</h2>
+<main class="main">
+  {#if error}
+    <p>{error}</p>
 
-      <img class="activity__img" src={activity.img} alt="Image spectacle" />
+  {:else if activities.length === 0}
+    <p>Chargement...</p>
 
-      <button class="main__button-info" type="button">
-        Plus d'informations
-      </button>
-    </section>
-  {/each}
+  {:else}
+    {#each activities as activity}
+      <section class="main__activity">
+        <h2>{activity.name}</h2>
+
+        <img
+          class="activity__img"
+          src={`/img/${activity.image}.jpg`}
+          alt={activity.name}
+        />
+
+        <button on:click={() => push(`/detail/${activity.id}`)}>
+          Plus d'informations
+        </button>
+      </section>
+    {/each}
+  {/if}
 </main>
+
