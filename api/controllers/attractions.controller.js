@@ -1,6 +1,6 @@
 import { Activity, Category } from "../models/index.js";
 
-export const getAllAttraction = async (req, res) => {
+export const getAllAttractions = async (req, res) => {
     const attractions = await Activity.findAll({
       include: {
         model: Category,
