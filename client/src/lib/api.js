@@ -1,24 +1,28 @@
-// centralise tous les appels API
-// gère le token JWT automatiquement
-// évite la duplication de code
-// rend ton front plus propre et pro
+// lib/services/api.js
+import { get } from "svelte/store";
+import authStore from "./store/authStore.js";
 
-export default async function api(endpoint, method = "GET", body) {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}${endpoint}`,
-    {
-      method,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(body),
-    }
-  );
+export default async function api(endpoint, method = "GET", body = null) {
+  const headers = {
+    "Content-Type": "application/json",
+  };
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${endpoint}: ${response.statusText}`);
+  const { token } = get(authStore); // toujours prendre le token actuel dans le store
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
   }
 
-  const data = await response.json();
-  return data;
+  const options = { method, headers };
+  if (body && method !== "GET") {
+    options.body = JSON.stringify(body);
+  }
+
+  const response = await fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, options);
+
+  if (!response.ok) {
+    const text = await response.text().catch(() => "Erreur API");
+    throw new Error(text);
+  }
+
+  return await response.json();
 }

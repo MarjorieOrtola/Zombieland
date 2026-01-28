@@ -1,7 +1,10 @@
 <script>
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
+  import Router from 'svelte-spa-router';
+  import authStore from './lib/store/authStore.js'; // Import du store (pas besoin de getAuth)
 
+  // Import des pages
   import Home from './routes/Home.svelte';
   import Contact from './routes/Contact.svelte';
   import Attraction from './routes/Attraction.svelte';
@@ -12,14 +15,12 @@
   import Faq from './routes/Faq.svelte';
   import Compte from './routes/Compte.svelte';
   import Connexion from './routes/Connexion.svelte';
+  import Detail from './routes/Detail.svelte';
 
-  import Router from 'svelte-spa-router';
-  import { getAuth } from './lib/store/auth.svelte.js';
-  
-  getAuth(); // restaure user/token depuis localStorage au chargement
+  // Pas besoin d'appeler getAuth(), l'état est déjà restauré à l'import du store
 
   const routes = {
-    '/': Home, /* Point d'entrée obligatoire */
+    '/': Home,
     '/home': Home,
     '/contact': Contact,
     '/attraction': Attraction,
@@ -30,13 +31,10 @@
     '/faq': Faq,
     '/compte': Compte,
     '/connexion': Connexion,
+    '/detail/:id' : Detail,
   };
 </script>
 
-
-
 <Header />
-
 <Router {routes} />
-
 <Footer />
