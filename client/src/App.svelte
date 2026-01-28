@@ -31,7 +31,7 @@
     '/faq': Faq,
     '/compte': Compte,
     '/connexion': Connexion,
-    '/detail/:id' : Detail,
+    '/detail/:type/:id': Detail
   };
 </script>
 

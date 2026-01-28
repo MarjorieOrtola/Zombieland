@@ -8,9 +8,7 @@ import express from "express";
 import { validateToken } from './middlewares/auth.middleware.js';
 
 // Import local modules
-import attractionRouter from './routes/attraction.router.js';
-import spectacleRouter from './routes/spectacle.router.js';
-import personnageRouter from './routes/personnage.router.js';
+import activityRouter from './routes/activity.router.js';
 import authRouter from './routes/auth.router.js';
 import reservationRouter from './routes/reservation.router.js';
 
@@ -36,9 +34,7 @@ app.use(xss());
 
 // Router inscription + authentification
 app.use(authRouter);
-app.use(attractionRouter);
-app.use(spectacleRouter);
-app.use(personnageRouter);
+app.use(activityRouter);
 app.use(reservationRouter);
 // Après le router des authentification
 // Ajoute le validateToken

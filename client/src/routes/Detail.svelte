@@ -1,6 +1,8 @@
 <script>
   import { onMount } from "svelte";
   import api from "../lib/api";
+  import { getActivityByCategoryAndId } from "../lib/services/activity.service.js";
+
 
   export let params = {}; // injecté par svelte-spa-router
 
@@ -8,16 +10,15 @@
   let error = "";
   let loading = true;
 
-  onMount(async () => {
-    try {
-      activity = await api(`/attractions/${params.id}`); // récupère l'activité via son ID
-    } catch (e) {
-      console.error(e);
-      error = "Activité introuvable";
-    } finally {
-      loading = false;
-    }
-  });
+ onMount(async () => {
+  try {
+    activity = await getActivityByCategoryAndId(params.type, params.id);
+  } catch (e) {
+    error = "Élément introuvable";
+  } finally {
+    loading = false;
+  }
+});
 </script>
 
 <main class="main">
