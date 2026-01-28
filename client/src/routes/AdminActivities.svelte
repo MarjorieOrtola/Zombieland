@@ -1,67 +1,153 @@
 <script>
   import { onMount } from "svelte";
-  import { getAllUsers, deleteUser } from "../lib/services/admin.service.js";
+  import {getAllActivities, deleteActivity } from "../lib/services/admin.service.js";
 
-  let users = [];
+  let activities = [];
   let loading = true;
   let error = "";
 
-  async function fetchUsers() {
+  async function fetchActivities() {
     try {
-      users = await getAllUsers();
+      activities = await getAllActivities();
     } catch (e) {
-      error = "Impossible de charger les utilisateurs";
+      error = "Impossible de charger les activités";
       console.error(e);
     } finally {
       loading = false;
     }
   }
 
-  async function removeUser(id) {
-    if (!confirm("Voulez-vous vraiment supprimer cet utilisateur ?")) return;
+  async function removeActivity(id) {
+    if (!confirm("Supprimer cette activité ?")) return;
+
     try {
-      await deleteUser(id);
-      users = users.filter(u => u.id !== id);
+      await deleteActivity(id);
+      activities = activities.filter(a => a.id !== id);
     } catch (e) {
       alert("Erreur lors de la suppression");
       console.error(e);
     }
   }
 
-  onMount(fetchUsers);
+  onMount(fetchActivities);
 </script>
 
-<h2>Utilisateurs</h2>
+<section class="admin-activities">
+  <h2>Gestion des activités</h2>
 
-{#if loading}
-  <p>Chargement...</p>
-{:else if error}
-  <p>{error}</p>
-{:else if users.length === 0}
-  <p>Aucun utilisateur trouvé</p>
-{:else}
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each users as user}
-        <tr>
-          <td>{user.id}</td>
-          <td>{user.first_name} {user.last_name}</td>
-          <td>{user.mail}</td>
-          <td>{user.role}</td>
-          <td>
-            <button on:click={() => removeUser(user.id)}>Supprimer</button>
-          </td>
-        </tr>
+  {#if loading}
+    <p>Chargement...</p>
+
+  {:else if error}
+    <p class="error">{error}</p>
+
+  {:else if activities.length === 0}
+    <p>Aucune activité trouvée</p>
+
+  {:else}
+    <ul class="activity-list">
+      {#each activities as activity}
+        <li class="activity-card">
+          <div class="activity-info">
+            <h3>{activity.name}</h3>
+            <p>
+              Niveau de peur : {activity.fear_level} <br />
+              Catégorie : {activity.category.name}
+            </p>
+            <img
+                class="activity__img"
+                src={`/img/${activity.image}.jpg`}
+                alt={activity.name}
+            />
+          </div>
+
+          <button
+            class="delete"
+            on:click={() => removeActivity(activity.id)}>
+            Supprimer
+          </button>
+        </li>
       {/each}
-    </tbody>
-  </table>
-{/if}
+    </ul>
+  {/if}
+</section>
+
+<style>
+/* =====================
+   MOBILE FIRST
+===================== */
+
+.admin-activities {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-activities h2 {
+  font-size: 1.2rem;
+}
+
+/* Liste */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+/* Carte activité */
+.activity-card {
+  background-color: rgba(0,0,0,0.4);
+  padding: 0.75rem;
+  border-radius: 4px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.activity-info h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.activity-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Bouton delete */
+.delete {
+  align-self: flex-start;
+  background-color: #b00020;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}
+
+.delete:hover {
+  background-color: #d32f2f;
+}
+
+.error {
+  color: #ff6b6b;
+}
+
+/* =====================
+   DESKTOP
+===================== */
+@media (min-width: 768px) {
+  .activity-card {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .delete {
+    align-self: center;
+  }
+}
+</style>

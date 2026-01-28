@@ -40,7 +40,29 @@ async function seed() {
       category_id: spectacle.id,
     });
 
-    // ... ajoute le reste des activités ici
+    await Activity.create({
+        name: 'Massacre à la Tronconneuse',
+        fear_level: 3,
+        image: "tronçonneuse",
+        description: 'Massacre à la Tronçonneuse est un spectacle terrifiant et immersif qui vous plonge au cœur d’un camp abandonné envahi par des zombies incontrôlables. Entre effets spéciaux saisissants, cascades spectaculaires, comédiens surgissant de l’ombre et une mise en scène haletante, chaque minute vous rapproche un peu plus de l’horreur. Le danger rôde, les survivants luttent pour leur vie, et personne n’est vraiment à l’abri… Un show intense, rythmé et visuellement impressionnant, réservé aux visiteurs les plus courageux. Oserez-vous assister au carnage… et en sortir indemne ?',
+        category_id: spectacle.id,
+    });
+    await Activity.create({
+        name: 'La survivante',
+        fear_level: 2,
+        image: "survivante",
+        description: 'Plongez au cœur de l’aventure dans Zombieland et vivez un moment unique en rencontrant la Survivante, l’icône de la résistance et l’héroïne qui a inspiré des générations de chasseurs de zombies ! Dans un décor post-apocalyptique soigneusement recréé, vous aurez l’opportunité de discuter avec elle, d’écouter ses conseils de survie, et peut-être même de lui demander un selfie pour immortaliser cette rencontre légendaire.',
+        category_id: personnage.id,
+    });
+    await Activity.create({
+        name: 'Frankenstein',
+        fear_level: 2,
+        image: "frankenstein",
+        description: 'Osez affronter la créature… si vous l’osez. Dans les profondeurs du Repaire Maudit de Zombieland, là où la lumière ne perce jamais, Frankenstein vous attend. Son souffle rauque résonne entre les murs couverts de moisissure, ses pas lourds font trembler le sol sous vos pieds. Il n’est pas là pour vous rassurer. Approchez-vous… si vous en avez le courage. Ses yeux jaunes, injectés de sang, vous transpercent. Sa voix grave, déchirée par des siècles de souffrance, murmure des histoires que personne ne devrait entendre. Il se souvient de chaque visage qu’il a croisé… et de ceux qu’il a perdus.',
+        category_id: personnage.id,
+    });
+
+ 
 
     // === HASH DES MOTS DE PASSE ===
 const hashedUserPassword = await argon2.hash("azerty123");

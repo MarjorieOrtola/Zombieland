@@ -1,127 +1,151 @@
 <script>
-  import AdminUsers from './AdminUsers.svelte';
-  import AdminActivities from './AdminActivities.svelte';
-  import AdminReservations from './AdminReservations.svelte';
+  import { clearAuth } from "../lib/store/authStore.js";
+  import { push } from "svelte-spa-router";
 
-  let activeTab = 'users';       // onglet par défaut
-  let menuOpen = false;          // burger menu mobile
+  import AdminUsers from "./AdminUsers.svelte";
+  import AdminActivities from "./AdminActivities.svelte";
+  import AdminReservations from "./AdminReservations.svelte";
 
-  const tabs = [
-    { key: 'users', label: 'Utilisateurs' },
-    { key: 'activities', label: 'Activités' },
-    { key: 'reservations', label: 'Réservations' }
-  ];
+  // Onglet actif
+  let activeTab = "users";
 
-  function setTab(tabKey) {
-    activeTab = tabKey;
-    menuOpen = false; // fermer le menu mobile après clic
+  function logout() {
+    clearAuth();
+    push("/connexion");
   }
 </script>
 
-<style>
-.dashboard {
-  display: flex;
-  min-height: 100vh;
-  background-color: var(--primary);
-  color: var(--color-text);
-  flex-direction: column; /* mobile first */
-}
+<!-- =====================
+     DASHBOARD
+===================== -->
+<section class="dashboard">
 
-.burger {
-  display: block;
-  padding: 0.5rem;
-  background: var(--color-button);
-  border: none;
-  color: var(--color-text);
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin: 0.5rem;
-}
+  <!-- Header -->
+  <header class="dashboard__header">
+    <h1>Dashboard Admin</h1>
 
-.sidebar {
-  position: absolute;
-  top: 0;
-  left: -250px;  /* caché par défaut */
-  width: 220px;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  transition: left 0.3s;
-  z-index: 1000;
-}
+    <button class="logout" on:click={logout}>
+      Déconnexion
+    </button>
+  </header>
 
-.sidebar.open {
-  left: 0;
-}
+  <!-- Tabs -->
+  <nav class="tabs">
+    <button
+      class:active={activeTab === "users"}
+      on:click={() => activeTab = "users"}>
+      Utilisateurs
+    </button>
 
-.sidebar button {
-  background: none;
-  border: none;
-  color: var(--color-text);
-  text-align: left;
-  padding: 0.5rem;
-  cursor: pointer;
-  font-size: 1rem;
-}
+    <button
+      class:active={activeTab === "activities"}
+      on:click={() => activeTab = "activities"}>
+      Activités
+    </button>
 
-.sidebar button.active {
-  font-weight: bold;
-  border-left: 3px solid var(--color-title-red);
-}
-
-.content {
-  flex: 1;
-  padding: 1rem;
-  margin-top: 3rem; /* espace burger menu */
-}
-
-/* Desktop */
-@media(min-width:768px){
-  .dashboard {
-    flex-direction: row;
-  }
-  .burger {
-    display: none;
-  }
-  .sidebar {
-    position: relative;
-    left: 0;
-    height: auto;
-  }
-  .content {
-    margin-top: 0;
-    padding: 2rem;
-  }
-}
-</style>
-
-<div class="dashboard">
-  <!-- Burger menu mobile -->
-  <button class="burger" on:click={() => menuOpen = !menuOpen}>☰</button>
-
-  <!-- Sidebar onglets -->
-  <nav class="sidebar" class:open={menuOpen}>
-    {#each tabs as tab}
-      <button
-        class:active={activeTab === tab.key}
-        on:click={() => setTab(tab.key)}
-      >
-        {tab.label}
-      </button>
-    {/each}
+    <button
+      class:active={activeTab === "reservations"}
+      on:click={() => activeTab = "reservations"}>
+      Réservations
+    </button>
   </nav>
 
-  <!-- Contenu -->
+  <!-- Content -->
   <main class="content">
-    {#if activeTab === 'users'}
+    {#if activeTab === "users"}
       <AdminUsers />
-    {:else if activeTab === 'activities'}
+    {:else if activeTab === "activities"}
       <AdminActivities />
-    {:else if activeTab === 'reservations'}
+    {:else}
       <AdminReservations />
     {/if}
   </main>
-</div>
+
+</section>
+
+<style>
+/* =====================
+   MOBILE FIRST
+===================== */
+
+.dashboard {
+  min-height: 100vh;
+  padding: 1rem;
+  background-color: var(--primary);
+  color: var(--color-text);
+}
+
+/* Header */
+.dashboard__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard__header h1 {
+  font-size: 1.4rem;
+}
+
+/* Logout */
+.logout {
+  align-self: flex-start;
+  background-color: #b00020;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background-color: #d32f2f;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tabs button {
+  flex: 1;
+  background: none;
+  border: 1px solid var(--color-text);
+  color: var(--color-text);
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background-color: var(--color-title-red);
+  border-color: var(--color-title-red);
+}
+
+/* Content */
+.content {
+  background-color: rgba(0,0,0,0.3);
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+/* =====================
+   DESKTOP
+===================== */
+@media (min-width: 768px) {
+  .dashboard {
+    padding: 2rem;
+  }
+
+  .dashboard__header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .tabs button {
+    flex: none;
+    padding: 0.5rem 1.5rem;
+  }
+}
+</style>
