@@ -1,25 +1,31 @@
 <script>
-  import authStore, { setAuth } from '../lib/store/authStore.js';
-import { loginUser } from '../lib/services/auth.service.js';
+  import authStore, { setAuth } from "../lib/store/authStore.js";
+  import { loginUser } from "../lib/services/auth.service.js";
 
+  let mail = "";
+  let password = "";
+  let error = "";
 
-  let mail = '';
-  let password = '';
-  let error = '';
+  async function handleSubmitLogin() {
+    try {
+      const { token, user } = await loginUser({ mail, password });
 
- async function handleSubmitLogin() {
-  try {
-    const { token, user } = await loginUser({ mail, password });
+      console.log("Token reçu :", token); // Debug
+      console.log("User reçu :", user); // Debug
 
-    console.log("Token reçu :", token); // Debug
-    console.log("User reçu :", user);   // Debug
-    setAuth(user, token);
-    window.location.href = '/#/compte';
-  } catch (err) {
-    console.error("Erreur complète :", err); // Debug
-    error = err.message || 'Erreur réseau ou serveur';
+      setAuth(user, token);
+
+      // Vérification du rôle
+      if (user.role === "admin") {
+        window.location.href = "/#/admin"; // Redirige vers le dashboard admin
+      } else {
+        window.location.href = "/#/compte"; // Redirige vers la page utilisateur normale
+      }
+    } catch (err) {
+      console.error("Erreur complète :", err); // Debug
+      error = err.message || "Erreur réseau ou serveur";
+    }
   }
-}
 </script>
 
 <main class="main">
