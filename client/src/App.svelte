@@ -16,6 +16,7 @@
   import Compte from './routes/Compte.svelte';
   import Connexion from './routes/Connexion.svelte';
   import Detail from './routes/Detail.svelte';
+  import Dashboard from './routes/Dashboard.svelte';
 
   // Pas besoin d'appeler getAuth(), l'état est déjà restauré à l'import du store
 
@@ -31,7 +32,8 @@
     '/faq': Faq,
     '/compte': Compte,
     '/connexion': Connexion,
-    '/detail/:id' : Detail,
+    '/detail/:type/:id': Detail,
+     '/admin': Dashboard, // <- toutes les routes admin vont passer par Dashboard
   };
 </script>
 
