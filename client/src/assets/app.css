@@ -24,7 +24,7 @@
   --gap: 1rem;
 }
 #app {
-    background-image: url('/img/fondecran.png');
+    background-image: url('/img/fondecran.jpg');
     background-size: cover;      
     background-position: center;  
     background-attachment: fixed; 
@@ -33,6 +33,7 @@
     min-height: 100vh;
     font-family:var(--font-paragraphe); 
 }
+
 h1,h2,h3{
     font-family: var(--font-big-title);
     color: var(--color-title-red);
@@ -254,6 +255,15 @@ h4{
   text-decoration: none;
   color: var(--color-text);
 }
+
+.footer_social a {
+color: darkred ;
+text-decoration:none ;
+font-weight: bold;
+margin: 0 0.5rem;
+}
+
+
 /* Page attractions */
 .main__activity{
   display: flex;
@@ -446,6 +456,16 @@ align-items: center;
   line-height: 0.4;
   padding: none;
   text-align: left;
+}
+
+.compte__reservation {
+  color: var(--color-text);
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+}
+
+.compte__bold {
+  font-weight: bold;
 }
 
 /* page billeterie */

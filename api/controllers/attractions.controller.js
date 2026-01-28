@@ -1,20 +1,35 @@
 import { Activity, Category } from "../models/index.js";
 
-const attractionController = {
-    async getAllAttraction(req,res){
-        const activities = await Activity.findAll({where : {category_id: 1}, include : 'category'});
-        console.log('activities', activities);
-        res.json(activities);
-    },
+export const getAllAttractions = async (req, res) => {
+    const attractions = await Activity.findAll({
+      include: {
+        model: Category,
+        as: "category",
+      },
+      where: { category_id: 1 }
+    });
+
+  res.json(attractions);
 };
 
+export const getById = async (req, res) => {
+  const { id } = req.params;
 
+  try {
+    const attraction = await Activity.findByPk(id, {
+      include: {
+        model: Category,
+        as: "category"
+      }
+    });
 
-export default attractionController;
+    if (!attraction) {
+      return res.status(404).json({ message: "Attraction introuvable" });
+    }
 
-
-// async getAllAttractions(req,res){
-        // const data = await Category.findAll({where: {name: 'attraction'},include: 'activities'});
-        // const attractions = data[0].activities;
-        // res.status(200).json(attractions);
-    // },
+    res.json(attraction);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+};

@@ -15,6 +15,8 @@ router.post("/register", validateUser, authController.registerUser);
 // Recoit les requetes de connexion
 router.post('/login', validateLogin, authController.login)
 
+
+// requête HTTP GET pour accéder au compte client avec les informations ET les réservations.
 router.get('/myaccount', validateToken, authController.getMyAccount)
 
 export default router;

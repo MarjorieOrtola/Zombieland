@@ -1,17 +1,17 @@
 import { Router } from "express";
 
 // import d'une instance de ProductController
-import spectacleController from "../controllers/spectacles.controller.js"; 
+import * as spectacleController from "../controllers/spectacles.controller.js"; 
 
 
 
 const router = Router();
 
 // requete HTTP GET
-router.get("/spectacles/", spectacleController.getAllSpectacle);
+router.get("/spectacles/", spectacleController.getAllSpectacles);
 
 // requete HTTP GET
-// router.get("/spectacle/:id");
+router.get("/spectacles/:id", spectacleController.getById);
 
 
 

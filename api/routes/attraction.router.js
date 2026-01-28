@@ -1,16 +1,10 @@
+
 import { Router } from "express";
-// import d'une instance de ProductController
-import attractionController from "../controllers/attractions.controller.js"; 
-
-
+import * as attractionController from "../controllers/attractions.controller.js";
 
 const router = Router();
 
-// requete HTTP GET
-router.get("/attractions/", attractionController.getAllAttraction);
-
-// requete HTTP GET
-// router.get("/attraction/:id", AttractionController.getById);
-
+router.get("/attractions", attractionController.getAllAttractions);
+router.get("/attractions/:id", attractionController.getById);
 
 export default router;
