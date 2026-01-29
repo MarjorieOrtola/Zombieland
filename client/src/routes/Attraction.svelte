@@ -37,7 +37,7 @@
           alt={activity.name}
         />
 
-        <button on:click={() => push(`/detail/attraction/${activity.id}`)}>
+        <button class="activity__button-detail" on:click={() => push(`/detail/attraction/${activity.id}`)}>
           Plus d'informations
         </button>
 

@@ -69,7 +69,6 @@
     {#if user}
       <div class="compte__header">
         <h2>Mon compte</h2>
-        <button class="btn-deconnexion" on:click={logout}>Déconnexion</button>
       </div>
 
       <div class="compte__profil">
@@ -114,26 +113,6 @@
 </main>
 
 <style>
-  .compte__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
-
-  .btn-deconnexion {
-    padding: 8px 16px;
-    background-color: #d63031;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-  }
-
-  .btn-deconnexion:hover {
-    background-color: #c0392b;
-  }
 
   .btn-supprimer {
     margin-left: 1rem;

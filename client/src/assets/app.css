@@ -319,6 +319,22 @@ margin: 0 0.5rem;
   background-color: var(--color-button);
 }
 
+.activity__button-detail{
+  background-color: var(--primary);
+  color: var(--color-text);
+  border: solid darkred 3px;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: transform 0.1s ease;
+}
+
+.activity__button-detail:hover{
+    background-color: var(--color-button);
+  transform: scale(1.1);
+}
+
 /* Pour les 3 pages: Attractions, spectacles, rencontres perso */
 .activity__img {
   max-height: 400px;
