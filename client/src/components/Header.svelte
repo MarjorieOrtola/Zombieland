@@ -1,4 +1,6 @@
 <script>
+  import authStore, { clearAuth } from "../lib/store/authStore.js";
+
   let menuOpen = false;
   let dropdownOpen = false;
 
@@ -14,6 +16,12 @@
     menuOpen = false;
     dropdownOpen = false;
   }
+
+function logout() {
+  clearAuth();
+  closeAll();
+  window.location.hash = "#/connexion";
+}
 </script>
 
 <svelte:window on:click={closeAll} />
@@ -33,9 +41,21 @@
       ☰
     </button>
 
-    <a class="header__button-login" href="/#/connexion">
-      Login
-    </a>
+{#if $authStore.token}
+  <button
+    class="header__button-login"
+    on:click={logout}
+  >
+    Déconnexion
+  </button>
+{:else}
+  <a
+    class="header__button-login"
+    href="/#/connexion"
+  >
+    Login
+  </a>
+{/if}
   </div>
 
   <nav class="header__class-nav" class:open={menuOpen}>
@@ -62,8 +82,11 @@
 
       <li><a href="/#/billetterie" on:click={closeAll}>Billetterie</a></li>
       <li><a href="/#/contact" on:click={closeAll}>Contact</a></li>
+    {#if $authStore.token}
       <li><a href="/#/compte" on:click={closeAll}>Mon Compte</a></li>
+    {:else}
       <li><a href="/#/inscription" on:click={closeAll}>Inscription</a></li>
+    {/if}
     </ul>
   </nav>
 </header>

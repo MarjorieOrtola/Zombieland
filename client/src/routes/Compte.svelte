@@ -8,7 +8,6 @@
   let user = null;
   let error = "";
 
-  // Récupération des infos utilisateur depuis l'API / store
   async function fetchUser() {
     try {
       const token = get(authStore).token;
@@ -17,13 +16,10 @@
         user = null;
         return;
       }
-
       const data = await getUser();
       user = data;
+      setAuth(user, token);
       error = "";
-
-      setAuth(user, token); // synchroniser le store
-
     } catch (err) {
       console.error(err);
       error = "Erreur serveur ou token invalide";
@@ -32,19 +28,16 @@
     }
   }
 
-  onMount(() => fetchUser());
+  onMount(fetchUser);
 
-  // Déconnexion
   function logout() {
     clearAuth();
     user = null;
     error = "Vous êtes déconnecté";
   }
 
-  // Supprimer une réservation
   async function handleDelete(reservationId) {
     if (!confirm("Voulez-vous vraiment supprimer cette réservation ?")) return;
-
     try {
       await deleteReservation(reservationId);
       alert("Réservation supprimée !");
@@ -54,104 +47,199 @@
     }
   }
 
-  // Vérifie si la réservation peut être supprimée
- function canDeleteReservation(date_entrance) {
-  const today = new Date();
-  const visitDate = new Date(date_entrance); // string → Date
-  const diffTime = visitDate.getTime() - today.getTime(); // en ms
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays > 10;
-}
+  function canDeleteReservation(date_entrance) {
+    const today = new Date();
+    const visitDate = new Date(date_entrance);
+    const diffDays = Math.ceil((visitDate - today) / (1000 * 60 * 60 * 24));
+    return diffDays > 10;
+  }
 </script>
 
-<main class="main">
-  <section class="main__compte">
-    {#if user}
-      <div class="compte__header">
-        <h2>Mon compte</h2>
-        <button class="btn-deconnexion" on:click={logout}>Déconnexion</button>
+<section class="compte">
+  {#if user}
+    <!-- Carte centrée profil utilisateur -->
+    <div class="profile-card-container">
+      <div class="profile-card">
+        <div class="compte__header">
+          <h2>Mon compte</h2>
+        </div>
+
+        <div class="profile-info">
+          <h3>{user.first_name} {user.last_name}</h3>
+          <div><strong>Email :</strong> {user.mail}</div>
+          <div><strong>Téléphone :</strong> {user.phone_number || "N/A"}</div>
+          <div><strong>Adresse :</strong> {user.address}</div>
+          <div><strong>Ville :</strong> {user.city}</div>
+          <div><strong>Code postal :</strong> {user.postcode}</div>
+        </div>
       </div>
+    </div>
 
-      <div class="compte__profil">
-        <p><strong>Prénom :</strong> {user.first_name}</p>
-        <p><strong>Nom :</strong> {user.last_name}</p>
-        <p><strong>Email :</strong> {user.mail}</p>
-        <p><strong>Adresse :</strong> {user.address}</p>
-        <p><strong>Ville :</strong> {user.city}</p>
-        <p><strong>Code postal :</strong> {user.postcode}</p>
-      </div>
-
-      <h3>Réservations</h3>
-      {#if user.reservations?.length > 0}
-        <ul>
-          {#each user.reservations as r}
-            <li class="compte__reservation">
-              {r.ticket.name} — {r.date_entrance} — 
-              <span class="compte__bold">{r.quantity} billet{r.quantity > 1 ? 's' : ''}</span> — 
-              Réf: {r.reference}
-
+    <!-- Réservations -->
+    <h2>Mes réservations</h2>
+    {#if user.reservations?.length > 0}
+      <ul class="reservation-list">
+        {#each user.reservations as r}
+          <li class="reservation-card">
+            <div class="reservation-info">
+              <h3>{r.ticket.name}</h3>
+              <div><strong>Date :</strong> {r.date_entrance}</div>
+              <div><strong>Billets :</strong> {r.quantity}</div>
+              <div><strong>Référence :</strong> {r.reference}</div>
+            </div>
+            <div class="actions">
               <button
-                class="btn-supprimer"
+                class="delete"
                 on:click={() => handleDelete(r.id)}
                 disabled={!canDeleteReservation(r.date_entrance)}
                 title={!canDeleteReservation(r.date_entrance) ? "Impossible de supprimer moins de 10 jours avant la visite" : ""}
               >
                 Supprimer
               </button>
-            </li>
-          {/each}
-        </ul>
-      {:else}
-        <p>Aucune réservation</p>
-      {/if}
-
-    {:else if error}
-      <p>{error}</p>
+            </div>
+          </li>
+        {/each}
+      </ul>
     {:else}
-      <p>Chargement...</p>
+      <p>Aucune réservation</p>
     {/if}
-  </section>
-</main>
+
+  {:else if error}
+    <p class="error">{error}</p>
+  {:else}
+    <p>Chargement...</p>
+  {/if}
+</section>
 
 <style>
-  .compte__header {
-    display: flex;
+
+
+h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: white;
+}
+
+
+.compte {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Conteneur pour centrer la carte */
+.profile-card-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.profile-card {
+  background: #5e5c5c8e; 
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+  gap: 1rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Header centré avec titre et bouton */
+.compte__header {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+  gap: 0.5rem;            
+}
+
+
+/* Infos utilisateur centrées */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centrer horizontalement */
+  gap: 0.2rem;
+}
+
+.profile-info div {
+  margin: 0.2rem 0;
+}
+
+.reservation-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.reservation-card {
+  background: #5e5c5c8e;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column; /* cartes mobiles empilées */
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.reservation-info h3 {
+  margin: 0 0 0.25rem 0;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.delete {
+  background-color: #b00020;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete:hover:enabled {
+  background-color: #d32f2f;
+}
+
+.delete:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+/* ========================
+   ERREURS ET MESSAGES
+======================== */
+.error {
+  color: #ff6b6b;
+}
+
+/* ========================
+   MEDIA QUERIES
+======================== */
+@media (min-width: 768px) {
+  .reservation-card {
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
   }
 
-  .btn-deconnexion {
-    padding: 8px 16px;
-    background-color: #d63031;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
+  .reservation-card .actions {
+    margin-top: 0;
   }
+}
 
-  .btn-deconnexion:hover {
-    background-color: #c0392b;
-  }
-
-  .btn-supprimer {
-    margin-left: 1rem;
-    padding: 5px 10px;
-    background-color: #f77f00;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
-  }
-
-  .btn-supprimer:disabled {
-    background-color: gray;
-    cursor: not-allowed;
-  }
-
-  .btn-supprimer:hover:enabled {
-    background-color: #d66a00;
-  }
 </style>

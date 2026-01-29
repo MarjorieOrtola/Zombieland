@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { push } from "svelte-spa-router";
-  import { getPersonnages } from "../lib/services/Rencontre_perso.service.js";
+  import { getActivitiesByCategory } from "../lib/services/activity.service.js";
 
   let activities = [];
   let error = "";
@@ -9,7 +9,7 @@
 
    onMount(async () => {
     try {
-      activities = await getPersonnages(); // Fetch la liste des personnages
+      activities = await getActivitiesByCategory("personnage"); // Fetch la liste des personnages
     } catch (e) {
       error = "Impossible de charger les personnages.";
     } 
@@ -36,9 +36,10 @@
           alt={activity.name}
         />
 
-        <button on:click={() => push(`/detail/${activity.id}`)}>
+        <button class="activity__button-detail" on:click={() => push(`/detail/personnage/${activity.id}`)}>
           Plus d'informations
         </button>
+
       </section>
     {/each}
   {/if}

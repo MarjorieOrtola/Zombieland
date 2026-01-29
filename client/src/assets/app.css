@@ -11,8 +11,8 @@
   --font-system: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
     sans-serif;
   --font-big-title: 'Nosifer', var(--font-system); 
-  --font-paragraphe:'Monserat', var(--font-system);
-  --color-title-red: RGB(254, 8, 10);
+  --font-paragraphe:'Montserrat', var(--font-system);
+  --color-title-red: RGB(254, 8, 10, 0.90);
   --color-title-white:RGB(211, 211, 211);
   --color-text:RGB(211, 211, 211);
   --color-input:black;
@@ -81,17 +81,29 @@ h4{
   color: var(--color-text);
   font-size: 1.5rem;
   cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
+.burger:hover {
+  transform: scale(1.1);
+}
+
 /*bouton de login*/
 .header__button-login{
   background-color: var(--color-button);
   color: var(--color-text);
+  text-decoration: none;
   border: solid darkred 3px;
   border-radius: 3px;
   padding: 0.5rem 1rem;
   cursor: pointer;
   margin-top: 0;   /* Permet d'aligner le bouton avec le menu burger*/
 }
+
+.header__button-login:hover{
+  transform: scale(1.1);
+}
+
 /* div avec le Logo et titre h1*/
 .header__class-logo{
   display: flex;
@@ -163,6 +175,9 @@ h4{
   position: relative;
   border: rgba(255, 255, 255, 0.197) solid 1px;  
 }
+.header__nav-list > li:hover {
+    transform: scale(1.1);
+}
 .header__nav-list li a {
   color: var(--color-text);
   text-decoration: none;
@@ -195,6 +210,7 @@ h4{
 .presentation__text{
   color: var(--color-title-white);
   text-align: center;
+  font-size: 1.2rem;
   min-width: 30%;
   max-width: 80%;
   margin-top: 2rem;
@@ -233,17 +249,42 @@ h4{
       black 95%,
       transparent
     );
-}
+}   
+
 .footer{
   text-align: center;
-  padding: 1rem;
   color: var(--color-text);
+  padding: 2rem;
+  
 }
 
+.footer_social {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
 .footer__faq {
   font-weight: bold;
   color: var(--color-text);
   margin-bottom: 1rem;
+}
+
+.footer__faq-button{
+  padding: 0.5rem 1.2rem;
+  background-color: var(--primary);
+  color: var(--color-text);
+  border: 2px solid darkred;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.footer__faq-button:hover{
+  background-color: var(--color-button);
+  transform: scale(1.03);
 }
 
 .footer__button{
@@ -251,16 +292,29 @@ h4{
 
   color: var(--color-title-white);
 }
-.footer__button a{
-  text-decoration: none;
-  color: var(--color-text);
-}
+
 
 .footer_social a {
-color: darkred ;
-text-decoration:none ;
-font-weight: bold;
-margin: 0 0.5rem;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: darkred;
+  text-decoration: none;
+
+  border: 2px solid darkred;
+  border-radius: 50%;
+
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.footer_social a:hover {
+  background-color: darkred;
+  color: white;
+  transform: scale(1.1);
 }
 
 
@@ -274,8 +328,33 @@ margin: 0 0.5rem;
 }
 .main__button-info{
   background-color: var(--primary);
-  color: var(--color-text);  
+  color: var(--color-text);
+  cursor: pointer;
+  margin: 1.5rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
+
+.main__button-info:hover{
+  background-color: var(--color-button);
+}
+
+.activity__button-detail{
+  background-color: var(--primary);
+  color: var(--color-text);
+  border: solid darkred 3px;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: transform 0.1s ease;
+}
+
+.activity__button-detail:hover{
+    background-color: var(--color-button);
+  transform: scale(1.1);
+}
+
 /* Pour les 3 pages: Attractions, spectacles, rencontres perso */
 .activity__img {
   max-height: 400px;
@@ -500,6 +579,10 @@ p{
   border-radius: 3px;
   background-color: var(--background-form);
   color: var(--color-input);
+}
+
+.ticket__amount:hover{
+  transform: scale(1.1);
 }
 
 /* page 404 */

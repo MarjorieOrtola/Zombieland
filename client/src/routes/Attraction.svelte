@@ -1,7 +1,8 @@
 <script>
   import { onMount } from "svelte";
   import { push } from "svelte-spa-router";
-  import { getAttractions } from "../lib/services/attraction.service.js";
+  import { getActivitiesByCategory } from "../lib/services/activity.service.js";
+
 
   let activities = [];
   let error = "";
@@ -9,7 +10,7 @@
 
    onMount(async () => {
     try {
-      activities = await getAttractions(); // Fetch la liste des attractions
+       activities = await getActivitiesByCategory("attraction");; // Fetch la liste des attractions
     } catch (e) {
       error = "Impossible de charger les attractions";
     } 
@@ -36,9 +37,10 @@
           alt={activity.name}
         />
 
-        <button on:click={() => push(`/detail/${activity.id}`)}>
+        <button class="activity__button-detail" on:click={() => push(`/detail/attraction/${activity.id}`)}>
           Plus d'informations
         </button>
+
       </section>
     {/each}
   {/if}

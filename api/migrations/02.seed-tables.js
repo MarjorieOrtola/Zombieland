@@ -1,38 +1,45 @@
-import dotenv from "dotenv"
+
+import dotenv from "dotenv";
+import argon2 from 'argon2';
 import sequelize from "../models/sequelize.client.js";
 import { Activity, Category, User, Ticket, Reservation } from "../models/index.js";
 
-async function seed(){
-    console.log('Syncing database...')
-    try{
-    const attraction = await Category.create({name: 'attraction'});
-    const spectacle = await Category.create({name: 'spectacle'});
-    const personnage = await Category.create({name: 'personnage'});
+async function seed() {
+  console.log('Syncing database...');
 
-    // Création de chaque ligne dans la table Activity en les liant à leurs category (attraction, spectacle et personnage)
+  try {
+    // Création des catégories
+    const attraction = await Category.create({ name: 'attraction' });
+    const spectacle = await Category.create({ name: 'spectacle' });
+    const personnage = await Category.create({ name: 'personnage' });
+
+    // Création des activités
     const deadRise = await Activity.create({
-        name: 'Dead Rise',
-        fear_level: 5,
-        image: "dead_rise",
-        description: 'Dead Rise est un roller coaster terrifiant qui plonge les visiteurs dans un univers post-apocalyptique envahi par les morts-vivants. Dès l’embarquement, la tension monte entre lumières vacillantes, cris lointains et silhouettes de zombies surgissant de l’ombre. Les virages serrés, descentes brutales et accélérations soudaines s’enchaînent sans répit, donnant l’impression d’une fuite désespérée face à une horde toujours plus proche. Chaque montée est une fausse accalmie avant une chute vertigineuse, faisant de Dead Rise bien plus qu’un manège : une véritable expérience de survie.',
-        category_id: attraction.id,
+      name: 'Dead Rise',
+      fear_level: 5,
+      image: "dead_rise",
+      description: 'Dead Rise est un roller coaster terrifiant...',
+      category_id: attraction.id,
     });
     console.log(deadRise.id);
-    const labyrinthe = await Activity.create({
-        name: 'Le labyrinthe des Zombies',
-        fear_level: 4,
-        image: "labyrinthe",
-        description: 'Le Labyrinthe des Zombies plonge les visiteurs au cœur d’un dédale sombre et oppressant où chaque détour peut être le dernier. Entre couloirs étroits, brume épaisse et décors délabrés, des zombies surgissent à tout moment, rendant la progression imprévisible et angoissante. Les cris, les lumières instables et les effets sonores accentuent la tension à chaque pas, obligeant les participants à rester constamment sur leurs gardes. Perdre son chemin devient facile, mais en sortir indemne est un véritable défi de survie.',
-        category_id: attraction.id,
-    });
-    console.log(labyrinthe.id);
+
+    // (Autres activités...)
     await Activity.create({
-        name: 'Le lâcher de Zombies',
-        fear_level: 4,
-        image: "lacher_zombies",
-        description: 'Le Lâcher de Zombies est un spectacle immersif où la frontière entre la scène et le public disparaît complètement. Dans une atmosphère chaotique faite de sirènes, de fumée et de lumières rouges, des hordes de zombies sont libérées et envahissent la zone, créant un sentiment de panique contrôlée et d’urgence permanente. Les comédiens surgissent de toutes parts, interagissent avec le décor et le public, et transforment l’espace en véritable zone de contamination. Plus qu’un spectacle, le Lâcher de Zombies est une expérience intense qui plonge les spectateurs au cœur d’une invasion vivante et terrifiante.',
-        category_id: spectacle.id,
+      name: 'Le labyrinthe des Zombies',
+      fear_level: 4,
+      image: "labyrinthe",
+      description: 'Le Labyrinthe des Zombies plonge les visiteurs...',
+      category_id: attraction.id,
     });
+
+    await Activity.create({
+      name: 'Le lâcher de Zombies',
+      fear_level: 4,
+      image: "lacher_zombies",
+      description: 'Le Lâcher de Zombies est un spectacle immersif...',
+      category_id: spectacle.id,
+    });
+
     await Activity.create({
         name: 'Massacre à la Tronconneuse',
         fear_level: 3,
@@ -55,45 +62,61 @@ async function seed(){
         category_id: personnage.id,
     });
 
-// Test création d'un compte utilisateur en dur
+ 
+
+    // === HASH DES MOTS DE PASSE ===
+const hashedUserPassword = await argon2.hash("azerty123");
+const hashedAdminPassword = await argon2.hash("admin123");
+
+    // Création d'un utilisateur
     const user = await User.create({
-        first_name: 'Frank',
-        last_name: 'Kenstein',
-        password: 'azerty123',
-        mail: 'frankenstein@gmail.com',
-        address: '30 rue de la grande avenue',
-        postcode: '95041',
-        city: 'Paris',
-        phone_number: '0123456789',
+      first_name: 'Frank',
+      last_name: 'Kenstein',
+      password: hashedUserPassword, // mot de passe hashé
+      mail: 'frankenstein@gmail.com',
+      address: '30 rue de la grande avenue',
+      postcode: '95041',
+      city: 'Paris',
+      phone_number: '0123456789',
     });
 
-// Creation du Ticket d'entrée unique 
+    // Création d'un admin
+    const admin = await User.create({
+      first_name: "Zombieland",
+      last_name: "Admin",
+      mail: "admin@zombieland.com",
+      password: hashedAdminPassword, // mot de passe hashé
+      role: "admin",
+      address: '56 rue des Lilas',
+      postcode: '95041',
+      city: 'Paris',
+      phone_number: '0187350913',
+    });
+    console.log("Admin créé !", admin.mail);
+
+    // Création d'un ticket
     const ticket = await Ticket.create({
-        name: 'Entrée unique',
-        price: 50.00,
-        date_entrance: new Date(),
+      name: 'Entrée unique',
+      price: 50.00,
+      date_entrance: new Date(),
     });
 
-// Creation d'une nouvelle réservation
-// Générer un numéro aléatoire pour la référence, par exemple 6 chiffres
+    // Création d'une réservation pour l'utilisateur
     const randomReference = Math.floor(100000 + Math.random() * 900000);
-
     await user.addTicket(ticket, {
       through: {
-        quantity: 2,       // nombre de tickets réservés
-        reference: randomReference, // référence arbitraire
+        quantity: 2,
+        reference: randomReference,
         date_entrance: new Date(),
-        // date_reservation sera automatique grâce à createdAt renommé
       },
-    });    
+    });
 
     console.log('✅ Seeding complete!');
-    } catch (error) {
-		console.log('Error seeding BDD', error);
-	} finally {
-		// Ferme la connexion à la BDD
-		await sequelize.close();
-	}
+  } catch (error) {
+    console.log('Error seeding BDD', error);
+  } finally {
+    await sequelize.close();
+  }
 }
 
 await seed();

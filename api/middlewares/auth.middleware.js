@@ -81,9 +81,12 @@ export function validateToken(req, res, next) {
 			throw new HttpError("Authorization token missing or invalid", 401)
 		}
 
-		req.user = {
-      		id: decoded.user_id,
-    	};
+	// req.user permet de stocker l'id, le mail et le role	
+		 req.user = {
+			id: decoded.user_id,
+			mail: decoded.mail,
+			role: decoded.role,
+    };
 		// 5. passe au middleware suivante
 		next();
 	});
