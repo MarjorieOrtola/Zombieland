@@ -2,7 +2,7 @@ import { User, Activity, Reservation, Category} from "../models/index.js";
 
 // USERS
 export const getAllUsers = async (req, res) => {
-  const users = await User.findAll({ attributes: ["id","first_name","last_name","mail","role"] });
+  const users = await User.findAll({ attributes: ["id","first_name","last_name","mail","role", "address", "postcode", "city", "phone_number"] });
   res.json(users);
 };
 
