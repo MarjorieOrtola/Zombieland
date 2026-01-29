@@ -82,7 +82,10 @@
 
 .dashboard__header h1 {
   font-size: 1.4rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
 }
+
 
 /* Logout */
 .logout {
