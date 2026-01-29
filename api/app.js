@@ -8,7 +8,7 @@ import express from "express";
 import { validateToken } from './middlewares/auth.middleware.js';
 
 // Import le middleware qui protège accès admin
-import adminMiddleware from "./middlewares/adminMiddleware.js";
+import adminMiddleware from "./middlewares/admin.middleware.js";
 
 // Import local modules
 import activityRouter from './routes/activity.router.js';

@@ -54,7 +54,7 @@
     <tbody>
       {#each reservations as r}
         <tr>
-          <td>{r.id}</td>
+    
           <td>{r.user.first_name} {r.user.last_name}</td>
           <td>{r.ticket.name}</td>
           <td>{r.quantity}</td>
