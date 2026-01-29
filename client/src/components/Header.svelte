@@ -84,13 +84,7 @@ function logout() {
       <li><a href="/#/contact" on:click={closeAll}>Contact</a></li>
     {#if $authStore.token}
       <li><a href="/#/compte" on:click={closeAll}>Mon Compte</a></li>
-      <li>
-        <button on:click={logout} class="header__nav-button">
-          Déconnexion
-        </button>
-      </li>
     {:else}
-      <li><a href="/#/connexion" on:click={closeAll}>Connexion</a></li>
       <li><a href="/#/inscription" on:click={closeAll}>Inscription</a></li>
     {/if}
     </ul>
