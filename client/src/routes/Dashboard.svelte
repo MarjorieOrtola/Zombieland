@@ -65,11 +65,13 @@
    MOBILE FIRST
 ===================== */
 
+
 .dashboard {
   min-height: 100vh;
   padding: 1rem;
   background-color: var(--primary);
-  color: var(--color-text);
+  color: white; /* ⚡ Texte blanc pour tout le dashboard */
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* Header */
@@ -84,6 +86,7 @@
   font-size: 1.4rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+  color: rgb(177, 166, 166);
 }
 
 
@@ -110,16 +113,15 @@
 
 .tabs button {
   flex: 1;
-  background: none;
-  border: 1px solid var(--color-text);
+  background: #8b0202;
   color: var(--color-text);
   padding: 0.5rem;
   cursor: pointer;
 }
 
 .tabs button.active {
-  background-color: var(--color-title-red);
-  border-color: var(--color-title-red);
+  background-color: #d1060677;
+  border-color: white;
 }
 
 /* Content */
@@ -127,7 +129,10 @@
   background-color: rgba(0,0,0,0.3);
   padding: 1rem;
   border-radius: 4px;
+  color: white;
+  
 }
+
 
 /* =====================
    DESKTOP

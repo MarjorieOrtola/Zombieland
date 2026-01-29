@@ -207,6 +207,8 @@
   h3, h2 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+  color:rgba(255, 255, 255, 0.795);
+
 }
   .admin-activities {
     display: flex;
