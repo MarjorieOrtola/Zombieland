@@ -24,9 +24,6 @@
   <header class="dashboard__header">
     <h1>Dashboard Admin</h1>
 
-    <button class="logout" on:click={logout}>
-      Déconnexion
-    </button>
   </header>
 
   <!-- Tabs -->
