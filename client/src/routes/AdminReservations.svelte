@@ -90,9 +90,11 @@
   gap: 0.5rem;
 }
 
-h3, h2 {
+ h3, h2 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+  color:rgba(255, 255, 255, 0.795);
+
 }
 
 .actions {
