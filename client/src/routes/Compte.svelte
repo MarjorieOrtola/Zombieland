@@ -62,7 +62,6 @@
       <div class="profile-card">
         <div class="compte__header">
           <h2>Mon compte</h2>
-          <button class="btn-deconnexion" on:click={logout}>Déconnexion</button>
         </div>
 
         <div class="profile-info">
@@ -113,129 +112,134 @@
 </section>
 
 <style>
-  h2, h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    color:white
-  }
 
-  .compte {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-  }
 
-  /* Conteneur pour centrer la carte */
-  .profile-card-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: white;
+}
 
-  /* Carte utilisateur centrée */
-  .profile-card {
-    background: #5e5c5c8e; /* même fond gris que le dashboard */
-    padding: 1rem 1.5rem;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap:wrap;
-    gap: 0.5rem;
-    max-width: 600px;
-    width: 100%;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
 
-  .profile-info div {
-    margin: 0.2rem 0;
-  }
+.compte {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
 
-  .compte__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
+/* Conteneur pour centrer la carte */
+.profile-card-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-  .btn-deconnexion {
-    padding: 0.5rem 1rem;
-    background-color: #d63031;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-  }
 
-  .btn-deconnexion:hover {
-    background-color: #c0392b;
-  }
+.profile-card {
+  background: #5e5c5c8e; 
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+  gap: 1rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
 
-  /* Liste de réservations */
-  .reservation-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    width: 100%;
-    max-width: 600px;
-  }
+/* Header centré avec titre et bouton */
+.compte__header {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+  gap: 0.5rem;            
+}
 
+
+/* Infos utilisateur centrées */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centrer horizontalement */
+  gap: 0.2rem;
+}
+
+.profile-info div {
+  margin: 0.2rem 0;
+}
+
+.reservation-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.reservation-card {
+  background: #5e5c5c8e;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column; /* cartes mobiles empilées */
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.reservation-info h3 {
+  margin: 0 0 0.25rem 0;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.delete {
+  background-color: #b00020;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete:hover:enabled {
+  background-color: #d32f2f;
+}
+
+.delete:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+/* ========================
+   ERREURS ET MESSAGES
+======================== */
+.error {
+  color: #ff6b6b;
+}
+
+/* ========================
+   MEDIA QUERIES
+======================== */
+@media (min-width: 768px) {
   .reservation-card {
-    background: #5e5c5c8e; /* même fond gris que le dashboard */
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
-    flex-direction: column;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   }
 
-  .reservation-info h3 {
-    margin: 0 0 0.25rem 0;
+  .reservation-card .actions {
+    margin-top: 0;
   }
+}
 
-  .actions {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .delete {
-    background-color: #b00020;
-    color: white;
-    border: none;
-    padding: 0.3rem 0.6rem;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-
-  .delete:hover:enabled {
-    background-color: #d32f2f;
-  }
-
-  .delete:disabled {
-    background-color: gray;
-    cursor: not-allowed;
-  }
-
-  .error {
-    color: #ff6b6b;
-  }
-
-  @media (min-width: 768px) {
-    .profile-card, .reservation-card {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .reservation-card .actions {
-      margin-top: 0;
-    }
-  }
 </style>
