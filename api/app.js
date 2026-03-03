@@ -33,7 +33,9 @@ app.use(express.json()); // 🔥 INDISPENSABLE
 // Après app.use JSON
 // Protection contre les failles XSS
 app.use(xss());
-
+/* ROUTES PUBLIQUES POUR RENDER */
+app.get("/", (req, res) => res.status(200).send("OK"));
+app.get("/health", (req, res) => res.status(200).json({ ok: true }));
 // Router inscription + authentification
 app.use(authRouter);
 app.use(activityRouter);
@@ -59,6 +61,4 @@ app.use((err, req, res, next) => {
 
 // Start server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 API started at http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`🚀 API started on port ${PORT}`));
