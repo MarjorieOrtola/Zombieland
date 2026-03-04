@@ -24,9 +24,19 @@ import { xss } from "express-xss-sanitizer";
 const app = express();
 // middleware cors
 // Accepte de partager les données avec localhost:5173
-app.use(cors({ origin: "https://zombieland-1.onrender.com" }));
-app.use(express.urlencoded({ extended: true }));
+import cors from "cors";
 
+app.use(
+  cors({
+    origin: ["https://zombieland-client.onrender.com", "http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  }),
+);
+
+// important pour les préflight
+app.options("*", cors());
 // Indique à express qu'on utiliser du JSON dans le body des requetes et des reponses HTTP
 app.use(express.json()); // 🔥 INDISPENSABLE
 
@@ -34,7 +44,7 @@ app.use(express.json()); // 🔥 INDISPENSABLE
 // Protection contre les failles XSS
 app.use(xss());
 /* ROUTES PUBLIQUES POUR RENDER */
-app.get("/", (req, res) => res.status(200).send("OK"));
+app.get("/", (req, res) => res.status(200).send("API Zombieland OK"));
 app.get("/health", (req, res) => res.status(200).json({ ok: true }));
 // Router inscription + authentification
 app.use(authRouter);
@@ -47,10 +57,6 @@ app.use(reservationRouter);
 app.use(validateToken);
 app.use(adminMiddleware);
 app.use(adminRouter);
-//Route test
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
 
 app.use((err, req, res, next) => {
   console.error(err);
