@@ -26,8 +26,6 @@ const app = express();
 // Accepte de partager les données avec localhost:5173
 import cors from "cors";
 
-import cors from "cors";
-
 app.use(
   cors({
     origin: ["https://zombieland-client.onrender.com", "http://localhost:5173"],
@@ -35,6 +33,9 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+
+// 👇 très important pour les requêtes preflight
+app.options("*", cors());
 
 // Indique à express qu'on utiliser du JSON dans le body des requetes et des reponses HTTP
 app.use(express.json()); // 🔥 INDISPENSABLE
