@@ -30,7 +30,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
 
 // Indique à express qu'on utiliser du JSON dans le body des requetes et des reponses HTTP
 app.use(express.json()); // 🔥 INDISPENSABLE
