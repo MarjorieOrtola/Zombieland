@@ -22,20 +22,15 @@ import { xss } from "express-xss-sanitizer";
 
 // Create Express app
 const app = express();
-// middleware cors
-// Accepte de partager les données avec localhost:5173
-import cors from "cors";
 
-app.use(
-  cors({
-    origin: ["https://zombieland-client.onrender.com", "http://localhost:5173"],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }),
-);
+const corsOptions = {
+  origin: ["https://zombieland-client.onrender.com", "http://localhost:5173"],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
-// 👇 très important pour les requêtes preflight
-app.options("*", cors());
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 // Indique à express qu'on utiliser du JSON dans le body des requetes et des reponses HTTP
 app.use(express.json()); // 🔥 INDISPENSABLE
