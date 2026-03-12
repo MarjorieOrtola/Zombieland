@@ -608,25 +608,31 @@ p {
     display: none;
   }
 }
-/* Desktop : 3 activités par ligne */
 @media (min-width: 1024px) {
-  .main__activity {
+  .activities-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     max-width: 1200px;
     margin: 2rem auto;
+    align-items: start;
   }
 
-  .main__activity article,
-  .main__activity .activity {
+  .main__activity {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 8px;
   }
 
   .activity__img {
     width: 100%;
+    max-width: 450px;
     height: 260px;
     object-fit: cover;
   }
