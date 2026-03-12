@@ -1,9 +1,6 @@
-
-
-// Proège des injection SQL
+// Protège des injection SQL
 
 export const validateId = (req, res, next) => {
-
   const id = Number(req.params.id);
 
   if (!Number.isInteger(id) || id <= 0) {

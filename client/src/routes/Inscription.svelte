@@ -21,8 +21,8 @@
       phone_number
     };
 
-    try {
-      const response = await fetch("http://localhost:3000/register", {
+     try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
