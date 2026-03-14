@@ -7,9 +7,12 @@
   let error = "";
   let success = "";
   const ticketId = 1;
+  const today = new Date();
+  const minDate = today.toISOString().split("T")[0];
+  const maxDate = `${today.getFullYear()}-12-31`;
 
   function increment() {
-    amount += 1;
+    if (amount < 99) amount += 1;
   }
 
   function decrement() {
@@ -24,7 +27,8 @@
 
     // Vérification connexion
     if (!token) {
-      error = "Veuillez vous connecter ou vous inscrire pour acheter des billets.";
+      error =
+        "Veuillez vous connecter ou vous inscrire pour acheter des billets.";
       return;
     }
 
@@ -50,7 +54,6 @@
       setTimeout(() => {
         window.location.href = "/#/compte";
       }, 1500);
-
     } catch (err) {
       if (err.message.includes("Unauthorized")) {
         error = "Veuillez vous connecter pour réserver des billets.";
@@ -62,7 +65,6 @@
     }
   }
 </script>
-
 
 <main class="main">
   <section class="main__activity">
@@ -82,7 +84,8 @@
         class="ticket__date-input"
         type="date"
         bind:value={selectedDate}
-        min={new Date().toISOString().split("T")[0]}
+        min={minDate}
+        max={maxDate}
       />
     </label>
 
@@ -90,7 +93,9 @@
       <label class="ticket__form-label" for="amount">Nombre de tickets</label>
 
       <div class="ticket__controls">
-        <button type="button" class="ticket__amount" on:click={decrement}>-</button>
+        <button type="button" class="ticket__amount" on:click={decrement}
+          >-</button
+        >
 
         <input
           type="number"
@@ -98,10 +103,13 @@
           name="amount"
           bind:value={amount}
           min="1"
+          max="99"
           required
         />
 
-        <button type="button" class="ticket__amount" on:click={increment}>+</button>
+        <button type="button" class="ticket__amount" on:click={increment}
+          >+</button
+        >
       </div>
 
       <button class="register__form-button" type="submit" disabled={loading}>
@@ -158,18 +166,16 @@
   }
 
   .ticket__date-label {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  gap: 0.5rem;
-  margin: 1rem 0;
-  text-align: center;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    text-align: center;
+  }
 
-.ticket__date-input {
-  text-align: center;
-  width: 160px;        
-}
-
-
+  .ticket__date-input {
+    text-align: center;
+    width: 160px;
+  }
 </style>

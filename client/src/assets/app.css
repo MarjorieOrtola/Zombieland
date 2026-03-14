@@ -143,6 +143,24 @@ h4 {
   background-color: rgba(0, 0, 0, 0.767);
   z-index: 1000;
 }
+.header__class-nav a,
+.header__nav-button {
+  background: none;
+  border: none;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.header__class-nav a:hover,
+.header__class-nav a:focus,
+.header__nav-button:hover,
+.header__nav-button:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
 .header__class-nav.open {
   display: flex;
 }
@@ -173,6 +191,7 @@ h4 {
   padding-left: 1rem;
   margin: 0.5rem 0 0 0;
 }
+
 .main {
   display: flex;
   flex-direction: column;
@@ -526,11 +545,6 @@ p {
   }
 }
 @media (min-width: 768px) {
-  .header__class-nav {
-    display: flex;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.288);
-  }
   .header__class-nav ul {
     margin: 0 auto;
     display: flex;
@@ -560,11 +574,13 @@ p {
   }
   /* Nav visible en horizontal */
   .header__class-nav {
+    display: flex !important;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.288);
     position: static; /* ← clé du fix */
     width: 100%;
     background-color: rgba(0, 0, 0, 0.425);
     z-index: auto;
-    display: flex !important;
   }
   .header__nav-list {
     display: flex;
@@ -606,34 +622,5 @@ p {
   /* Cacher le burger sur desktop */
   .burger {
     display: none;
-  }
-}
-@media (min-width: 1024px) {
-  .activities-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 2rem auto;
-    align-items: start;
-  }
-
-  .main__activity {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.45);
-    border-radius: 8px;
-  }
-
-  .activity__img {
-    width: 100%;
-    max-width: 450px;
-    height: 260px;
-    object-fit: cover;
   }
 }

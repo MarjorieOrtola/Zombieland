@@ -1,49 +1,49 @@
 <script>
-  // Valeurs des inputs
-  let first_name = '';
-  let last_name = '';
-  let mail = '';
-  let password = '';
-  let address = '';
-  let city = '';
-  let postcode = '';
-  let phone_number = '';
+import { registerUser } from "../lib/services/auth.service";
 
-  async function handleSubmit() {
-    const user = {
-      first_name,
-      last_name,
-      mail,
-      password,
-      address,
-      city,
-      postcode,
-      phone_number
-    };
+let first_name = "";
+let last_name = "";
+let mail = "";
+let password = "";
+let address = "";
+let city = "";
+let postcode = "";
+let phone_number = "";
 
-     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      });
+async function handleSubmit() {
 
-      const data = await response.json();
+  const user = {
+    first_name,
+    last_name,
+    mail,
+    password,
+    address,
+    city,
+    postcode,
+    phone_number
+  };
 
-      if (!response.ok) {
-        alert("Erreur : " + (data.message || "Impossible de créer le compte"));
-        return;
-      }
-      alert("Compte créé avec succès !");
-      window.location.href = "/myaccount";
+  try {
+    await registerUser(user);
 
-      // Réinitialiser le formulaire
-      first_name = last_name = mail = password = address = city = postcode = phone_number = '';
-    } catch (error) {
-      console.error(error);
-      alert("Erreur réseau ou serveur. Vérifiez la console.");
-    }
+    alert("Compte créé avec succès !");
+    window.location.href = "/myaccount";
+
+    // Réinitialiser le formulaire
+    first_name = "";
+    last_name = "";
+    mail = "";
+    password = "";
+    address = "";
+    city = "";
+    postcode = "";
+    phone_number = "";
+
+  } catch (error) {
+    console.error(error);
+    alert("Erreur : " + error.message);
   }
+}
 </script>
 
 <section class="main__register">
@@ -61,15 +61,16 @@
 
     <label class="register__form-label" for="mdp">Mot de passe</label>
     <input type="password" id="mdp" bind:value={password} required />
+    <p class="register__constrain">Le mot de passe doit contenir minimum 12 caractères</p>
 
     <label class="register__form-label" for="adresse">Adresse</label>
-    <input type="text" id="adresse" bind:value={address} required />
+    <input type="text" id="adresse" bind:value={address}/>
 
     <label class="register__form-label" for="ville">Ville</label>
-    <input type="text" id="ville" bind:value={city} required />
+    <input type="text" id="ville" bind:value={city}/>
 
     <label class="register__form-label" for="code-postal">Code postal</label>
-    <input type="text" id="code-postal" bind:value={postcode} required />
+    <input type="text" id="code-postal" bind:value={postcode}/>
 
     <label class="register__form-label" for="phone">Téléphone</label>
     <input type="text" id="phone" bind:value={phone_number} required />
@@ -77,3 +78,13 @@
     <button class="register__form-button" type="submit">S'inscrire</button>
   </form>
 </section>
+
+<style>
+
+.register__constrain {
+  font-size: 0.85rem;
+  background-color: black;
+  color: #ebe1e1;
+  margin-top: 4px;
+}
+</style>

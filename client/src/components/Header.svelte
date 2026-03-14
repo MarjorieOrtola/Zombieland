@@ -90,25 +90,3 @@ function logout() {
     </ul>
   </nav>
 </header>
-
-<style>
-.header__class-nav a,
-.header__nav-button {
-  background: none;
-  border: none;
-  color: var(--color-text);
-  font-family: inherit;
-  font-size: inherit;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  text-align: left;
-}
-
-.header__class-nav a:hover,
-.header__class-nav a:focus,
-.header__nav-button:hover,
-.header__nav-button:focus {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-</style>
