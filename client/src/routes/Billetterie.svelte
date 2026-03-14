@@ -41,12 +41,12 @@
     loading = true;
 
     try {
-      await createTickets({
-        ticket_id: ticketId,
-        date_entrance: selectedDate,
-        quantity: amount,
-       
-      });
+await createTickets({
+  ticket_id: Number(ticketId),
+  date_entrance: selectedDate,
+  quantity: Number(amount),
+});
+
 
       success = "Billets réservés avec succès ! Redirection en cours…";
 
