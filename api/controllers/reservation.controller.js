@@ -73,6 +73,8 @@ const reservationController = {
         date_entrance: reservationCreated.date_entrance,
       });
     } catch (error) {
+      console.error("Erreur création réservation :", error);
+      console.error("Erreur Sequelize détaillée :", error?.errors);
       next(error);
     }
   },

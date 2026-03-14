@@ -45,7 +45,7 @@
         ticket_id: ticketId,
         date_entrance: selectedDate,
         quantity: amount,
-        token, // On passe le token à la requête
+       
       });
 
       success = "Billets réservés avec succès ! Redirection en cours…";
