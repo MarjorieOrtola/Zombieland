@@ -27,7 +27,7 @@ async function handleSubmit() {
     await registerUser(user);
 
     alert("Compte créé avec succès !");
-    window.location.href = "/myaccount";
+    window.location.href = "/#/compte";
 
     // Réinitialiser le formulaire
     first_name = "";
@@ -48,18 +48,21 @@ async function handleSubmit() {
 
 <section class="main__register">
   <h2 class="register__title">Créez votre compte</h2>
+  <p class="equired">
+  Les champs marqués d’un * sont obligatoires
+</p>
 
   <form class="register__form" on:submit|preventDefault={handleSubmit}>
-    <label class="register__form-label" for="first_name">Prénom</label>
+    <label class="register__form-label" for="first_name">Prénom*</label>
     <input type="text" id="first_name" bind:value={first_name} required />
 
-    <label class="register__form-label" for="nom">Nom</label>
+    <label class="register__form-label" for="nom">Nom*</label>
     <input type="text" id="nom" bind:value={last_name} required />
 
-    <label class="register__form-label" for="mail">Mail</label>
+    <label class="register__form-label" for="mail">Mail*</label>
     <input type="email" id="mail" bind:value={mail} required />
 
-    <label class="register__form-label" for="mdp">Mot de passe</label>
+    <label class="register__form-label" for="mdp">Mot de passe*</label>
     <input type="password" id="mdp" bind:value={password} required />
     <p class="register__constrain">Le mot de passe doit contenir minimum 12 caractères</p>
 
@@ -73,7 +76,7 @@ async function handleSubmit() {
     <input type="text" id="code-postal" bind:value={postcode}/>
 
     <label class="register__form-label" for="phone">Téléphone</label>
-    <input type="text" id="phone" bind:value={phone_number} required />
+    <input type="text" id="phone" bind:value={phone_number} />
 
     <button class="register__form-button" type="submit">S'inscrire</button>
   </form>
@@ -86,5 +89,10 @@ async function handleSubmit() {
   background-color: black;
   color: #ebe1e1;
   margin-top: 4px;
+}
+
+.required {
+  color: red;
+  margin-left: 4px;
 }
 </style>

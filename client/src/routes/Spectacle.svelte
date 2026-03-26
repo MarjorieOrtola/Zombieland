@@ -32,7 +32,7 @@
 
         <img
           class="activity__img"
-          src={`/img/${activity.image}.jpg`}
+          src={`/img/${activity.image}.webp`}
           alt={activity.name}
         />
 

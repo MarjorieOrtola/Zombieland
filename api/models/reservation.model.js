@@ -17,6 +17,7 @@ Reservation.init(
     reference: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      unique: true,
     },
     quantity: {
       type: DataTypes.INTEGER,

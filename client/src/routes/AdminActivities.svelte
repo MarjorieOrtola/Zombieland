@@ -146,7 +146,7 @@
             </p>
             <img
               class="activity__img"
-              src={`/img/${activity.image}.jpg`}
+              src={`/img/${activity.image}.webp`}
               alt={activity.name}
             />
           </div>
@@ -193,7 +193,7 @@
         {/each}
       </select>
 
-      <input placeholder="Image (sans .jpg)" bind:value={form.image} />
+      <input placeholder="Image (sans .webp)" bind:value={form.image} />
 
       <div class="modal-actions">
         <button on:click={saveActivity}> Enregistrer </button>

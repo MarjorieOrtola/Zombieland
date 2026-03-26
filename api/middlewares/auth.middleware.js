@@ -34,13 +34,11 @@ export function validateUser(req, res, next) {
     }),
 
     phone_number: Joi.string()
-      .pattern(/^[0-9]{10}$/)
-      .required()
+      .pattern(/^$|^[0-9]{10}$/)
+      .allow("")
       .messages({
-        "string.empty": "Le numéro de téléphone est obligatoire",
         "string.pattern.base":
           "Le numéro de téléphone doit contenir 10 chiffres",
-        "any.required": "Le numéro de téléphone est obligatoire",
       }),
 
     city: Joi.string().min(2).max(50).allow("").messages({

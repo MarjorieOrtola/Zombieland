@@ -28,7 +28,7 @@ function logout() {
 
 <header class="header">
   <div class="header__class-logo">
-    <img class="header__logo" src="/img/Logozombieland.jpg" alt="Zombieland Logo" />
+    <img class="header__logo" src="/img/Logozombieland.webp" alt="Zombieland Logo" />
     <h1>Bienvenue dans le parc d'attractions Zombieland</h1>
   </div>
 

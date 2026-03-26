@@ -1,12 +1,12 @@
 <script>
   const activities = [
     {
-      title: 'DEAD RISE',
-      img: '/img/dead_rise.jpg'
+      title: 'L\'AVENTURE COMMENCE ICI',
+      img: '/img/ZombieLand.webp'
     },
     {
       title: 'PLAN DU SITE',
-      img: '/img/plan.png'
+      img: '/img/plan.webp'
     }
   ];
 </script>
