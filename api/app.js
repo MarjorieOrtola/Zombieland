@@ -24,7 +24,7 @@ import { xss } from "express-xss-sanitizer";
 const app = express();
 
 const corsOptions = {
-  origin: ["https://zombieland-client.onrender.com", "http://localhost:5173"],
+  origin: ["https://zombieland-1.onrender.com", "http://localhost:5173"],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
