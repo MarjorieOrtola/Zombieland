@@ -52,7 +52,7 @@ await createTickets({
 
       // Redirection après un petit délai
       setTimeout(() => {
-        window.location.href = "/#/compte";
+      window.location.hash = "#/compte";
       }, 1500);
     } catch (err) {
       if (err.message.includes("Unauthorized")) {
