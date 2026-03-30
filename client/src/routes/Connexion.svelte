@@ -10,9 +10,6 @@
     try {
       const { token, user } = await loginUser({ mail, password });
 
-      console.log("Token reçu :", token); // Debug
-      console.log("User reçu :", user); // Debug
-
       setAuth(user, token);
 
       // Vérification du rôle

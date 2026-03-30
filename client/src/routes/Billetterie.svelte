@@ -41,18 +41,17 @@
     loading = true;
 
     try {
-await createTickets({
-  ticket_id: Number(ticketId),
-  date_entrance: selectedDate,
-  quantity: Number(amount),
-});
-
+      await createTickets({
+        ticket_id: Number(ticketId),
+        date_entrance: selectedDate,
+        quantity: Number(amount),
+      });
 
       success = "Billets réservés avec succès ! Redirection en cours…";
 
       // Redirection après un petit délai
       setTimeout(() => {
-      window.location.hash = "#/compte";
+        window.location.hash = "#/compte";
       }, 1500);
     } catch (err) {
       if (err.message.includes("Unauthorized")) {
