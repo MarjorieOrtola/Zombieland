@@ -16,7 +16,7 @@
       if (user.role === "admin") {
         window.location.href = "/#/admin"; // Redirige vers le dashboard admin
       } else {
-        window.location.href = "/#/compte"; // Redirige vers la page utilisateur normale
+        window.location.href = "/#/compte"; // Redirige vers la page utilisateur normalegit push
       }
     } catch (err) {
       console.error("Erreur complète :", err); // Debug

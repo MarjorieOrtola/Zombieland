@@ -65,7 +65,7 @@ h4 {
   display: flex;
   flex-direction: column;
   height: auto;
-  margin: 0.5rem;
+  margin: 0rem 0.5rem 0.5rem 0.5rem;
   z-index: 100;
 }
 /* menu burger à gauche et login à droite dans le header */
