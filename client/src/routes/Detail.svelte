@@ -28,7 +28,7 @@
   {:else}
     <h2>{activity.name}</h2>
     <p>{activity.description}</p>
-    <p>{activity.fear_level}</p>
+    <p>Niveau de peur{activity.fear_level}/5</p>
     <img src={`/img/${activity.image}.webp`} alt={activity.name} />
   {/if}
 </main>
