@@ -87,6 +87,10 @@
         max={maxDate}
       />
     </label>
+    <p>
+      ATTENTION! LES RESERVATIONS SONT ANNULABLES JUSQU'A 10 JOURS AVANT LA DATE
+      DE VISITE
+    </p>
 
     <form class="ticket" on:submit|preventDefault={validate}>
       <label class="ticket__form-label" for="amount">Nombre de tickets</label>
